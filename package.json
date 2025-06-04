@@ -1,0 +1,12 @@
+{
+  "name": "zender-sms-gateway",
+  "version": "1.0.0",
+  "description": "Zender Android Mobile Devices as SMS Gateway SaaS Platform - Frontend Assets",
+  "main": "index.js",
+  "scripts": {
+    "build": "echo 'No build step defined'",
+    "start": "echo 'No start script defined'"
+  },
+  "author": "khulnasoft-lab",
+  "license": "proprietary"
+}
