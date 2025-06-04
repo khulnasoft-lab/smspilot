@@ -58,7 +58,7 @@
                             <i class="la la-code-branch la-lg"></i> {$package.webhooks}
                         </h4>
 
-                        <button class="btn btn-{if $package.id < 2}primary{else}secondary{/if} btn-lg btn-block mt-3" {if $package.id > 1}zender-toggle="zender.providers/{$package.id}"{/if} {if $package.id < 2}disabled{/if}>
+                        <button class="btn btn-{if $package.id < 2}primary{else}secondary{/if} btn-lg btn-block mt-3" {if $package.id > 1}smspilot-toggle="smspilot.providers/{$package.id}"{/if} {if $package.id < 2}disabled{/if}>
                             {if $package.id < 2}
                                 <i class="la la-bolt"></i> {lang_btn_free}
                             {else}

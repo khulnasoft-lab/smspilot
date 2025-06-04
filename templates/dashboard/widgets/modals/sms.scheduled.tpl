@@ -1,4 +1,4 @@
-<form zender-form>
+<form smspilot-form>
     <div class="modal-content">
         <div class="modal-header">
             <h3 class="modal-title">
@@ -45,7 +45,7 @@
 
                 <div class="form-group col-6">
                     <label>{lang_form_schedule_schedule}</label>
-                    <input type="text" name="schedule" class="form-control" placeholder="eg. 06/22/2020 12:00 AM" zender-datepicker-schedule>
+                    <input type="text" name="schedule" class="form-control" placeholder="eg. 06/22/2020 12:00 AM" smspilot-datepicker-schedule>
                 </div>
 
                 <div class="form-group col-6">
@@ -76,7 +76,7 @@
 
                 <div class="form-group col-12">
                     <label>{lang_form_template}</label>
-                    <select class="form-control" data-live-search="true" zender-select-template>
+                    <select class="form-control" data-live-search="true" smspilot-select-template>
                         <option value="none" data-tokens="no none 0" selected>{lang_form_none}</option>
                         {foreach $data.templates as $template}
                         <option value="{$template@key}" data-tokens="{$template.token}" data-format="{$template.format}">{$template.name}</option>

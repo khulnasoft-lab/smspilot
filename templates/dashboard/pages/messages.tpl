@@ -1,4 +1,4 @@
-<div class="container" zender-wrapper>
+<div class="container" smspilot-wrapper>
     <div class="page-title">
         <div class="container">
             <div class="row">
@@ -22,25 +22,25 @@
                         <div class="card-body">
                             <ul>
                                 <li class="nav-item">
-                                    <a href="#" class="nav-link active" zender-tab="zender.{$page}.sent" zender-tab-default>
+                                    <a href="#" class="nav-link active" smspilot-tab="smspilot.{$page}.sent" smspilot-tab-default>
                                         <i class="la la-telegram"></i>
                                         <span>{lang_dashboard_messages_menusent}</span>
                                     </a>
                                 </li>
                                 <li class="nav-item">
-                                    <a href="#" class="nav-link" zender-tab="zender.{$page}.received">
+                                    <a href="#" class="nav-link" smspilot-tab="smspilot.{$page}.received">
                                         <i class="la la-sms"></i>
                                         <span>{lang_dashboard_messages_menureceived}</span>
                                     </a>
                                 </li>
                                 <li class="nav-item">
-                                    <a href="#" class="nav-link" zender-tab="zender.{$page}.scheduled">
+                                    <a href="#" class="nav-link" smspilot-tab="smspilot.{$page}.scheduled">
                                         <i class="la la-clock"></i>
                                         <span>{lang_dashboard_messages_menuscheduled}</span>
                                     </a>
                                 </li>
                                 <li class="nav-item">
-                                    <a href="#" class="nav-link" zender-tab="zender.{$page}.templates">
+                                    <a href="#" class="nav-link" smspilot-tab="smspilot.{$page}.templates">
                                         <i class="la la-wrench"></i>
                                         <span>{lang_dashboard_messages_menutemplates}</span>
                                     </a>
@@ -54,7 +54,7 @@
             </div>
 
             <div class="col-xl-9 col-md-8">
-                <zender-tab-content></zender-tab-content>
+                <smspilot-tab-content></smspilot-tab-content>
 
                 {_block("1679091c5a880faf6fb5e6087eb1b2dc")}
             </div>

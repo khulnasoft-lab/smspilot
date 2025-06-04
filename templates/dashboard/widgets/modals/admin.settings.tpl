@@ -1,4 +1,4 @@
-<form zender-form>
+<form smspilot-form>
     <div class="modal-content">
         <div class="modal-header">
             <h3 class="modal-title">
@@ -18,7 +18,7 @@
 
                 <div class="form-group col-3">
                     <label>{lang_form_settingssitename}</label>
-                    <input type="text" name="site_name" class="form-control" placeholder="eg. Zender" value="{$data.system.site_name}">
+                    <input type="text" name="site_name" class="form-control" placeholder="eg. Smspilot" value="{$data.system.site_name}">
                 </div>
 
                 <div class="form-group col-3">

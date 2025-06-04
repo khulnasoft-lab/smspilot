@@ -10,7 +10,7 @@
 
     <div class="card-body pt-0">
         <div class="embed-responsive">
-            <iframe class="embed-responsive-item position-relative" zender-iframe="{site_url}/widget/chart/admin.earnings"></iframe>
+            <iframe class="embed-responsive-item position-relative" smspilot-iframe="{site_url}/widget/chart/admin.earnings"></iframe>
         </div>
     </div>
 </div>
@@ -26,7 +26,7 @@
 
     <div class="card-body pt-0">
         <div class="embed-responsive">
-            <iframe class="embed-responsive-item position-relative" zender-iframe="{site_url}/widget/chart/admin.messages"></iframe>
+            <iframe class="embed-responsive-item position-relative" smspilot-iframe="{site_url}/widget/chart/admin.messages"></iframe>
         </div>
     </div>
 </div>
@@ -43,7 +43,7 @@
 
     <div class="card-body pt-0">
         <div class="embed-responsive">
-            <iframe class="embed-responsive-item position-relative" zender-iframe="{site_url}/widget/chart/admin.users"></iframe>
+            <iframe class="embed-responsive-item position-relative" smspilot-iframe="{site_url}/widget/chart/admin.users"></iframe>
         </div>
     </div>
 </div>

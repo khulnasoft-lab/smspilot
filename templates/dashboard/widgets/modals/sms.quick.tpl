@@ -1,4 +1,4 @@
-<form zender-form>
+<form smspilot-form>
     <div class="modal-content">
         <div class="modal-header">
             <h3 class="modal-title">
@@ -14,7 +14,7 @@
             <div class="form-row">
                 <div class="form-group col-12">
                     <label>{lang_form_number}</label>
-                    <input type="text" name="phone" class="form-control" placeholder="eg. +639123456789" zender-autocomplete="contacts">
+                    <input type="text" name="phone" class="form-control" placeholder="eg. +639123456789" smspilot-autocomplete="contacts">
                 </div>
                 
                 <div class="form-group col-12">

@@ -1,4 +1,4 @@
-<form zender-form>
+<form smspilot-form>
     <div class="modal-content">
         <div class="modal-header">
             <h3 class="modal-title">
@@ -31,7 +31,7 @@
                     <small class="text-danger">
                         {lang_form_required}
                     </small>
-                    <input type="text" name="app_name" class="form-control" placeholder="eg. Zender Gateway" value="{$data.builder.app_name}">
+                    <input type="text" name="app_name" class="form-control" placeholder="eg. Smspilot Gateway" value="{$data.builder.app_name}">
                 </div>
 
                 <div class="form-group col-4">

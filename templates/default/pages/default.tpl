@@ -1,4 +1,4 @@
-<div zender-wrapper>
+<div smspilot-wrapper>
     <section id="features" class="main-section bg-white">
         <div class="section-head" data-aos="fade-up">
             <h2 class="section-title">{lang_landing_feat_title}</h2>

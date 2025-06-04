@@ -1,4 +1,4 @@
-<div class="container" zender-wrapper>
+<div class="container" smspilot-wrapper>
     <div class="page-title">
         <div class="container">
             <div class="row">
@@ -12,17 +12,17 @@
 
                     {if super_admin}
                     <div class="float-right">
-                        <button class="btn btn-lg btn-primary" zender-forums>
+                        <button class="btn btn-lg btn-primary" smspilot-forums>
                             <i class="la la-comments la-lg"></i>
                             <span class="d-none d-sm-inline">{lang_dashboard_btn_forums}</span>
                         </button>
 
-                        <button class="btn btn-lg btn-primary" zender-toggle="zender.admin.theme">
+                        <button class="btn btn-lg btn-primary" smspilot-toggle="smspilot.admin.theme">
                             <i class="la la-palette la-lg"></i>
                             <span class="d-none d-sm-inline">{lang_dashboard_btn_theme}</span>
                         </button>
 
-                        <button class="btn btn-lg btn-primary" zender-toggle="zender.admin.settings">
+                        <button class="btn btn-lg btn-primary" smspilot-toggle="smspilot.admin.settings">
                             <i class="la la-cog la-lg"></i>
                             <span class="d-none d-sm-inline">{lang_dashboard_btn_settings}</span>
                         </button>
@@ -41,14 +41,14 @@
                         <div class="card-body">
                             <ul>
                                 <li class="nav-item">
-                                    <a href="#" class="nav-link active" zender-tab="zender.{$page}.default" zender-tab-default>
+                                    <a href="#" class="nav-link active" smspilot-tab="smspilot.{$page}.default" smspilot-tab-default>
                                         <i class="la la-chart-area"></i>
                                         <span>{lang_dashboard_admin_menustats}</span>
                                     </a>
                                 </li>
                                 {if permission("manage_users")}
                                 <li class="nav-item">
-                                    <a href="#" class="nav-link" zender-tab="zender.{$page}.users">
+                                    <a href="#" class="nav-link" smspilot-tab="smspilot.{$page}.users">
                                         <i class="la la-users"></i>
                                         <span>{lang_dashboard_admin_menuusers}</span>
                                     </a>
@@ -56,7 +56,7 @@
                                 {/if}
                                 {if super_admin}
                                 <li class="nav-item">
-                                    <a href="#" class="nav-link" zender-tab="zender.{$page}.roles">
+                                    <a href="#" class="nav-link" smspilot-tab="smspilot.{$page}.roles">
                                         <i class="la la-shield"></i>
                                         <span>{lang_dashboard_admin_menuroles}</span>
                                     </a>
@@ -64,7 +64,7 @@
                                 {/if}
                                 {if permission("manage_packages")}
                                 <li class="nav-item">
-                                    <a href="#" class="nav-link" zender-tab="zender.{$page}.packages">
+                                    <a href="#" class="nav-link" smspilot-tab="smspilot.{$page}.packages">
                                         <i class="la la-cubes"></i>
                                         <span>{lang_dashboard_admin_menupackages}</span>
                                     </a>
@@ -72,7 +72,7 @@
                                 {/if}
                                 {if permission("manage_vouchers")}
                                 <li class="nav-item">
-                                    <a href="#" class="nav-link" zender-tab="zender.{$page}.vouchers">
+                                    <a href="#" class="nav-link" smspilot-tab="smspilot.{$page}.vouchers">
                                         <i class="la la-money-bill-wave"></i>
                                         <span>{lang_dashboard_admin_menuvouchers}</span>
                                     </a>
@@ -80,7 +80,7 @@
                                 {/if}
                                 {if permission("manage_subscriptions")}
                                 <li class="nav-item">
-                                    <a href="#" class="nav-link" zender-tab="zender.{$page}.subscriptions">
+                                    <a href="#" class="nav-link" smspilot-tab="smspilot.{$page}.subscriptions">
                                         <i class="la la-crown"></i>
                                         <span>{lang_dashboard_admin_menusubscriptions}</span>
                                     </a>
@@ -88,7 +88,7 @@
                                 {/if}
                                 {if permission("manage_transactions")}
                                 <li class="nav-item">
-                                    <a href="#" class="nav-link" zender-tab="zender.{$page}.transactions">
+                                    <a href="#" class="nav-link" smspilot-tab="smspilot.{$page}.transactions">
                                         <i class="la la-coins"></i>
                                         <span>{lang_dashboard_admin_menutransactions}</span>
                                     </a>
@@ -96,7 +96,7 @@
                                 {/if}
                                 {if permission("manage_widgets")}
                                 <li class="nav-item">
-                                    <a href="#" class="nav-link" zender-tab="zender.{$page}.widgets">
+                                    <a href="#" class="nav-link" smspilot-tab="smspilot.{$page}.widgets">
                                         <i class="la la-puzzle-piece"></i>
                                         <span>{lang_dashboard_admin_menuwidgets}</span>
                                     </a>
@@ -104,7 +104,7 @@
                                 {/if}
                                 {if permission("manage_pages")}
                                 <li class="nav-item">
-                                    <a href="#" class="nav-link" zender-tab="zender.{$page}.pages">
+                                    <a href="#" class="nav-link" smspilot-tab="smspilot.{$page}.pages">
                                         <i class="la la-stream"></i>
                                         <span>{lang_dashboard_admin_menupages}</span>
                                     </a>
@@ -112,7 +112,7 @@
                                 {/if}
                                 {if permission("manage_languages")}
                                 <li class="nav-item">
-                                    <a href="#" class="nav-link" zender-tab="zender.{$page}.languages">
+                                    <a href="#" class="nav-link" smspilot-tab="smspilot.{$page}.languages">
                                         <i class="la la-language"></i>
                                         <span>{lang_dashboard_admin_menulanguages}</span>
                                     </a>
@@ -136,11 +136,11 @@
                     </div>
 
                     <div class="card-footer">
-                        <button class="btn btn-lg btn-primary" zender-build>
+                        <button class="btn btn-lg btn-primary" smspilot-build>
                             <i class="la la-hammer la-lg"></i> {lang_dashboard_btn_build}
                         </button>
 
-                        <button class="btn btn-lg btn-primary" zender-toggle="zender.admin.builder">
+                        <button class="btn btn-lg btn-primary" smspilot-toggle="smspilot.admin.builder">
                             <i class="la la-tools la-lg"></i> {lang_dashboard_btn_buildsettings}
                         </button>
                     </div>
@@ -149,7 +149,7 @@
             </div>
 
             <div class="col-xl-9 col-md-8">
-                <zender-tab-content></zender-tab-content>
+                <smspilot-tab-content></smspilot-tab-content>
 
                 {_block("1679091c5a880faf6fb5e6087eb1b2dc")}
             </div>

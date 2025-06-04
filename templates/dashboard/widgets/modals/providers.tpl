@@ -11,24 +11,24 @@
     
     <div class="modal-body">
         {if $data.providers.paypal}
-        <button class="btn btn-lg btn-primary btn-block" zender-toggle="zender.payment/{$data.package.id}/paypal">
+        <button class="btn btn-lg btn-primary btn-block" smspilot-toggle="smspilot.payment/{$data.package.id}/paypal">
             <i class="la la-paypal la-lg"></i> {lang_pay_with_paypal}
         </button>
         {/if}
 
         {if $data.providers.stripe}
-        <button class="btn btn-lg btn-primary btn-block" zender-toggle="zender.payment/{$data.package.id}/stripe">
+        <button class="btn btn-lg btn-primary btn-block" smspilot-toggle="smspilot.payment/{$data.package.id}/stripe">
             <i class="la la-cc-stripe la-lg"></i> {lang_pay_with_stripe}
         </button>
         {/if}
 
         {if $data.providers.mollie}
-        <button class="btn btn-lg btn-primary btn-block" mollie-package="{$data.package.id}" zender-action="mollie">
+        <button class="btn btn-lg btn-primary btn-block" mollie-package="{$data.package.id}" smspilot-action="mollie">
             <i class="la la-euro-sign la-lg"></i> {lang_pay_with_mollie}
         </button>
         {/if}
 
-        <button class="btn btn-lg btn-primary btn-block" zender-toggle="zender.payment/{$data.package.id}/voucher">
+        <button class="btn btn-lg btn-primary btn-block" smspilot-toggle="smspilot.payment/{$data.package.id}/voucher">
             <i class="la la-money-bill-wave la-lg"></i> {lang_pay_with_voucher}
         </button>
     </div>

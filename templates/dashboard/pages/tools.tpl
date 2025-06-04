@@ -1,4 +1,4 @@
-<div class="container" zender-wrapper>
+<div class="container" smspilot-wrapper>
     <div class="page-title">
         <div class="container">
             <div class="row">
@@ -22,31 +22,31 @@
                         <div class="card-body">
                             <ul>
                                 <li class="nav-item">
-                                    <a href="#" class="nav-link active" zender-tab="zender.{$page}.keys" zender-tab-default>
+                                    <a href="#" class="nav-link active" smspilot-tab="smspilot.{$page}.keys" smspilot-tab-default>
                                         <i class="la la-key"></i>
                                         <span>{lang_dashboard_tools_menukeys}</span>
                                     </a>
                                 </li>
                                 <li class="nav-item">
-                                    <a href="#" class="nav-link" zender-tab="zender.{$page}.webhooks">
+                                    <a href="#" class="nav-link" smspilot-tab="smspilot.{$page}.webhooks">
                                         <i class="la la-code-branch"></i>
                                         <span>{lang_dashboard_tools_menuhooks}</span>
                                     </a>
                                 </li>
                                 <li class="nav-item">
-                                    <a href="#" class="nav-link" zender-tab="zender.{$page}.actions">
+                                    <a href="#" class="nav-link" smspilot-tab="smspilot.{$page}.actions">
                                         <i class="la la-robot"></i>
                                         <span>{lang_dashboard_tools_menuactions}</span>
                                     </a>
                                 </li>
                                 <li class="nav-item">
-                                    <a href="#" class="nav-link" zender-tab="zender.{$page}.guide.api">
+                                    <a href="#" class="nav-link" smspilot-tab="smspilot.{$page}.guide.api">
                                         <i class="la la-terminal"></i>
                                         <span>{lang_dashboard_tools_menuapidoc}</span>
                                     </a>
                                 </li>
                                 <li class="nav-item">
-                                    <a href="#" class="nav-link" zender-tab="zender.{$page}.guide.webhooks">
+                                    <a href="#" class="nav-link" smspilot-tab="smspilot.{$page}.guide.webhooks">
                                         <i class="la la-code"></i>
                                         <span>{lang_dashboard_tools_menuhookdoc}</span>
                                     </a>
@@ -60,7 +60,7 @@
             </div>
 
             <div class="col-xl-9 col-md-8">
-                <zender-tab-content></zender-tab-content>
+                <smspilot-tab-content></smspilot-tab-content>
 
                 {_block("1679091c5a880faf6fb5e6087eb1b2dc")}
             </div>

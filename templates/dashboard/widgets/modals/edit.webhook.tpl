@@ -1,4 +1,4 @@
-<form zender-form>
+<form smspilot-form>
     <div class="modal-content">
         <div class="modal-header">
             <h3 class="modal-title">
@@ -24,7 +24,7 @@
 
                 <div class="form-group col-12">
                     <label>{lang_form_devices}</label>
-                    <select name="devices[]" class="form-control" data-live-search="true" zender-select-devices multiple>
+                    <select name="devices[]" class="form-control" data-live-search="true" smspilot-select-devices multiple>
                         <option value="0" data-tokens="auto automatic" {if $data.automatic}selected{/if}>{lang_form_automatic}</option>
                         {foreach $data.devices as $device}
                         <option value="{$device@key}" data-tokens="{$device.token}" {if $device.selected}selected{/if}>{$device.name}</option>

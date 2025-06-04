@@ -1,5 +1,5 @@
 <div class="modal-content">
-    <div class="modal-body" zender-view>
+    <div class="modal-body" smspilot-view>
         <p class="text-center">{$data.content}</p>
     </div>
 

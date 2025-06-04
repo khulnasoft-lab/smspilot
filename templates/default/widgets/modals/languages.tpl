@@ -1,4 +1,4 @@
-<form zender-form>
+<form smspilot-form>
     <div class="modal-content">
         <div class="modal-header">
             <h3 class="modal-title">
@@ -14,7 +14,7 @@
             <div class="row">
                 {foreach $data.languages as $language}
                 <div class="col-3 text-center">
-                    <a href="#" class="all-languages" title="{$language.name}" zender-language="{$language.id}">
+                    <a href="#" class="all-languages" title="{$language.name}" smspilot-language="{$language.id}">
                         <i class="flag-icon flag-icon-{$language.iso} p-1"></i>
                     </a>
                 </div>

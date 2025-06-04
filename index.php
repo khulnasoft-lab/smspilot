@@ -1,6 +1,6 @@
 <?php
 /**
- * Zender - Android Mobile Devices as SMS Gateway (SaaS Platform)
+ * Smspilot - Android Mobile Devices as SMS Gateway (SaaS Platform)
  * @author Titan Systems <mail@titansystems.ph>
  */ 
 

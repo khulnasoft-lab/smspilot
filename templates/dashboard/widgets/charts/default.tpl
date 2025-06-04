@@ -8,6 +8,6 @@
 		"{_assets("js/libs/apexcharts.min.js")}",
 		"{_assets("js/libs/iframeResizer.contentWindow.min.js")}"
 	])).then(() => {
-		zender.charts("{$chart}");
+		smspilot.charts("{$chart}");
 	});
 </script>

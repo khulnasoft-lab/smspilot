@@ -1,7 +1,7 @@
 {
-  "name": "zender-sms-gateway",
+  "name": "smspilot-sms-gateway",
   "version": "1.0.0",
-  "description": "Zender Android Mobile Devices as SMS Gateway SaaS Platform - Frontend Assets",
+  "description": "Smspilot Android Mobile Devices as SMS Gateway SaaS Platform - Frontend Assets",
   "main": "index.js",
   "scripts": {
     "build": "echo 'No build step defined'",

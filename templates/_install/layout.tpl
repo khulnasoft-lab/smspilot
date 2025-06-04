@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <link rel="icon" href="./templates/_assets/images/favicon.png">
 
-    <title>Installation &middot; Zender</title>
+    <title>Installation &middot; Smspilot</title>
 
     <link rel="stylesheet" href="//fonts.googleapis.com/css2?family=Rubik:wght@400;500;700&display=swap">
     <link rel="stylesheet" href="templates/_assets/css/libs/line-awesome.min.css">
@@ -23,7 +23,7 @@
 
 <body>
 
-    <div zender-preloader>
+    <div smspilot-preloader>
         <div class="sk-three-bounce">
             <div class="sk-child sk-bounce1"></div>
             <div class="sk-child sk-bounce2"></div>
@@ -31,13 +31,13 @@
         </div>
     </div>
 
-    <div zender-wrapper>
+    <div smspilot-wrapper>
 	    <div class="container">
 	    	<div class="w-100 mb-5 text-center">
 	    		<img src="./templates/_install/assets/images/logo.png" class="w-25">
 	    	</div>
 
-            <div class="card mx-auto" zender-install>
+            <div class="card mx-auto" smspilot-install>
                 <div class="card-header mx-auto">
                     <h2>
                         <i class="la la-magic la-lg"></i> 
@@ -45,7 +45,7 @@
                     </h2>
                 </div>
 
-                <form zender-form>
+                <form smspilot-form>
 	                <div class="card-body">
 	        			<div class="form-row">
 	                    	<div class="form-group mb-0 col-12">
@@ -54,7 +54,7 @@
 
 			                <div class="form-group col-6">
 			                    <label>Site Name</label>
-			                    <input type="text" name="site_name" class="form-control" placeholder="eg. Zender">
+			                    <input type="text" name="site_name" class="form-control" placeholder="eg. Smspilot">
 			                </div>
 
 			                <div class="form-group col-6">
@@ -83,7 +83,7 @@
 
 			                <div class="form-group col-6">
 			                    <label>Database Name</label>
-			                    <input type="text" name="dbname" class="form-control" placeholder="eg. zender_db">
+			                    <input type="text" name="dbname" class="form-control" placeholder="eg. smspilot_db">
 			                </div>
 			                
 			                <div class="form-group col-6">
@@ -122,14 +122,14 @@
 	                <div class="card-footer text-center">
 					    <button type="submit" class="btn btn-lg btn-primary pt-3">
 					    	<h4 class="text-white">
-					    		<i class="la la-cog la-lg"></i> Install Zender
+					    		<i class="la la-cog la-lg"></i> Install Smspilot
 					    	</h4>
 					    </button>
 					</div>
 				</form>
             </div>
 
-            <div class="card mx-auto" style="display: none" zender-installed>
+            <div class="card mx-auto" style="display: none" smspilot-installed>
                 <div class="card-header mx-auto">
                     <h2>
                         <i class="la la-check-circle la-lg"></i> 
@@ -138,7 +138,7 @@
                 </div>
 
                 <div class="card-body text-center">
-                	<h4 class="text-uppercase">Zender has been successfully installed!</h4>
+                	<h4 class="text-uppercase">Smspilot has been successfully installed!</h4>
                 	<div class="alert alert-warning">
                 		<h6 class="text-uppercase">Please delete the following files/folders:</h6>
                 		<ul class="mb-3">

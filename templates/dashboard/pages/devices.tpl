@@ -1,4 +1,4 @@
-<div class="container" zender-wrapper>
+<div class="container" smspilot-wrapper>
     <div class="page-title">
         <div class="container">
             <div class="row">
@@ -22,13 +22,13 @@
                         <div class="card-body">
                             <ul>
                                 <li class="nav-item">
-                                    <a href="#" class="nav-link active" zender-tab="zender.{$page}.registered" zender-tab-default>
+                                    <a href="#" class="nav-link active" smspilot-tab="smspilot.{$page}.registered" smspilot-tab-default>
                                         <i class="la la-qrcode"></i>
                                         <span>{lang_dashboard_devices_menuregistered}</span>
                                     </a>
                                 </li>
                                 <li class="nav-item">
-                                    <a href="#" class="nav-link" zender-tab="zender.{$page}.guide">
+                                    <a href="#" class="nav-link" smspilot-tab="smspilot.{$page}.guide">
                                         <i class="la la-book"></i>
                                         <span>{lang_dashboard_devices_menuguide}</span>
                                     </a>
@@ -42,7 +42,7 @@
             </div>
 
             <div class="col-xl-9 col-md-8">
-                <zender-tab-content></zender-tab-content>
+                <smspilot-tab-content></smspilot-tab-content>
 
                 {_block("1679091c5a880faf6fb5e6087eb1b2dc")}
             </div>

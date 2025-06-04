@@ -1,4 +1,4 @@
-<form zender-form>
+<form smspilot-form>
     <div class="modal-content">
         <div class="modal-header border-0">
             <button type="button" class="close" data-dismiss="modal">
@@ -25,7 +25,7 @@
                 </div>
 
                 <div class="flex center">
-                    <a href="#" class="text-muted text-uppercase mt-4" zender-toggle="zender.forgot">{lang_form_forgotpass}</a>
+                    <a href="#" class="text-muted text-uppercase mt-4" smspilot-toggle="smspilot.forgot">{lang_form_forgotpass}</a>
                 </div>
             </div>
         </div>

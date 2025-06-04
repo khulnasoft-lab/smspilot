@@ -6,9 +6,9 @@
          */
 
         alert.setup();
-        zender.select();
+        smspilot.select();
 
-        $("[zender-form]").on("submit", function(e) {
+        $("[smspilot-form]").on("submit", function(e) {
             e.preventDefault();
 
             var required = "site_name|Site name<=>site_desc|Site description<=>protocol|Protocol<=>dbhost|Database host<=>dbname|Database name<=>dbuser|Database username<=>name|Full name<=>email|Email address<=>password|Password";
@@ -39,7 +39,7 @@
                         }
                     }
 
-                    zender.disabled();
+                    smspilot.disabled();
                 },
                 success: (response) => {
                     try {
@@ -47,8 +47,8 @@
 
                         switch (response.status) {
                             case 200:
-                                $("[zender-install]").fadeOut("fast", function() {
-                                    $("[zender-installed]").fadeIn("fast");
+                                $("[smspilot-install]").fadeOut("fast", function() {
+                                    $("[smspilot-installed]").fadeIn("fast");
                                 });
                                 break;
                             default:
@@ -58,7 +58,7 @@
                         alert.danger(lang_response_went_wrong);
                     }
 
-                    zender.disabled(false);
+                    smspilot.disabled(false);
                 }
             });
         });
@@ -67,8 +67,8 @@
          * Preloader
          */
 
-        $("[zender-preloader]").fadeOut("fast", () => {
-            zender.ripple();
+        $("[smspilot-preloader]").fadeOut("fast", () => {
+            smspilot.ripple();
         });
     });
 })(jQuery);

@@ -3,7 +3,7 @@
         <h4 class="card-title"><i class="la la-language"></i> {lang_dashboard_admin_tablanguagestitle}</h4>
 
         <div class="float-right">
-            <button class="btn btn-lg btn-primary" zender-toggle="zender.add.language">
+            <button class="btn btn-lg btn-primary" smspilot-toggle="smspilot.add.language">
                 <i class="la la-language la-lg"></i>
                 <span class="d-none d-sm-inline">{lang_dashboard_btn_addlanguage}</span>
             </button>
@@ -12,7 +12,7 @@
 
     <div class="card-body">
         <div class="dt-responsive table-responsive">
-            <table class="table table-striped" zender-table></table>
+            <table class="table table-striped" smspilot-table></table>
         </div>
     </div>
 </div>

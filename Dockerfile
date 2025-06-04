@@ -1,4 +1,4 @@
-# Dockerfile for Zender SMS Gateway SaaS
+# Dockerfile for Smspilot SMS Gateway SaaS
 FROM php:8.1-apache
 
 # Install system dependencies

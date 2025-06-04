@@ -33,5 +33,5 @@ jobs:
 
       # - name: Push Docker image
       #   run: |
-      #     docker tag smspilot:ci yourdockerhub/zender-sms-gateway:latest
-      #     docker push yourdockerhub/zender-sms-gateway:latest
+      #     docker tag smspilot:ci yourdockerhub/smspilot-sms-gateway:latest
+      #     docker push yourdockerhub/smspilot-sms-gateway:latest

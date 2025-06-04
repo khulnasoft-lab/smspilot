@@ -1,4 +1,4 @@
-<div zender-wrapper>
+<div smspilot-wrapper>
     <div class="page-title">
         <div class="container">
             <div class="row">
@@ -11,17 +11,17 @@
                     </div>
 
                     <div class="float-right">
-                        <button class="btn btn-lg btn-primary" zender-toggle="zender.sms.quick">
+                        <button class="btn btn-lg btn-primary" smspilot-toggle="smspilot.sms.quick">
                             <i class="la la-telegram la-lg"></i>
                             <span class="d-none d-sm-inline">{lang_dashboard_btn_smsquick}</span>
                         </button>
 
-                        <button class="btn btn-lg btn-primary" zender-toggle="zender.add.contact">
+                        <button class="btn btn-lg btn-primary" smspilot-toggle="smspilot.add.contact">
                             <i class="la la-address-book la-lg"></i>
                             <span class="d-none d-sm-inline">{lang_dashboard_btn_addcontact}</span>
                         </button>
 
-                        <button class="btn btn-lg btn-primary" zender-toggle="zender.add.device">
+                        <button class="btn btn-lg btn-primary" smspilot-toggle="smspilot.add.device">
                             <i class="la la-android la-lg"></i>
                             <span class="d-none d-sm-inline">{lang_dashboard_btn_adddevice}</span>
                         </button>
@@ -45,7 +45,7 @@
 
                     <div class="card-body pt-0">
                         <div class="embed-responsive">
-                            <iframe class="embed-responsive-item position-relative" zender-iframe="{site_url}/widget/chart/dashboard.default"></iframe>
+                            <iframe class="embed-responsive-item position-relative" smspilot-iframe="{site_url}/widget/chart/dashboard.default"></iframe>
                         </div>
 
                         <div class="text-center">
@@ -91,7 +91,7 @@
                                 <h4 class="card-title">
                                     <i class="la la-telegram"></i> {lang_dashboard_default_lastsent}
                                 </h4>
-                                <a href="{site_url("dashboard/messages")}" zender-nav>
+                                <a href="{site_url("dashboard/messages")}" smspilot-nav>
                                     {lang_dashboard_default_viewall}
                                 </a>
                             </div>
@@ -133,7 +133,7 @@
                                 <h4 class="card-title">
                                     <i class="la la-sms"></i> {lang_dashboard_default_lastreceived}
                                 </h4>
-                                <a href="{site_url("dashboard/messages")}" zender-nav>
+                                <a href="{site_url("dashboard/messages")}" smspilot-nav>
                                     {lang_dashboard_default_viewall}
                                 </a>
                             </div>
@@ -185,7 +185,7 @@
                                 <div class="media-body">
                                     <h5 class="m-0 text-uppercase">
                                         {lang_dashboard_default_packagesend}
-                                        <span class="help" zender-toggle="zender.view/tooltips-1">
+                                        <span class="help" smspilot-toggle="smspilot.view/tooltips-1">
                                             <i class="la la-question-circle"></i>
                                         </span>
                                     </h5>
@@ -200,7 +200,7 @@
                                 <div class="media-body">
                                     <h5 class="m-0 text-uppercase">
                                         {lang_dashboard_default_packagereceive}
-                                        <span class="help" zender-toggle="zender.view/tooltips-2">
+                                        <span class="help" smspilot-toggle="smspilot.view/tooltips-2">
                                             <i class="la la-question-circle"></i>
                                         </span>
                                     </h5>
@@ -215,7 +215,7 @@
                                 <div class="media-body">
                                     <h5 class="m-0 text-uppercase">
                                         {lang_dashboard_default_packagedevice}
-                                        <span class="help" zender-toggle="zender.view/tooltips-3">
+                                        <span class="help" smspilot-toggle="smspilot.view/tooltips-3">
                                             <i class="la la-question-circle"></i>
                                         </span>
                                     </h5>
@@ -230,7 +230,7 @@
                                 <div class="media-body">
                                     <h5 class="m-0 text-uppercase">
                                         {lang_dashboard_default_package}
-                                        <span class="help" zender-toggle="zender.view/tooltips-4">
+                                        <span class="help" smspilot-toggle="smspilot.view/tooltips-4">
                                             <i class="la la-question-circle"></i>
                                         </span>
                                     </h5>

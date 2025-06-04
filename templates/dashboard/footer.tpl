@@ -1,6 +1,6 @@
     {include "./modules/footer.block.tpl"}
 
-    <div zender-preloader>
+    <div smspilot-preloader>
         <div class="sk-three-bounce">
             <div class="sk-child sk-bounce1"></div>
             <div class="sk-child sk-bounce2"></div>

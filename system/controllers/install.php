@@ -92,12 +92,12 @@ UPDATE settings SET value = \"{$request["protocol"]}\" WHERE name = \"protocol\"
 			if($this->file->put("populate.sql", $query)):
 				@new Import("populate.sql", $request["dbuser"], $request["dbpass"], $request["dbname"], $dbhost, $dbport);
 			else:
-				response(500, "Something went wrong while installing zender!");
+				response(500, "Something went wrong while installing smspilot!");
 			endif;
 		} catch(Exception $e){
-			response(500, "Something went wrong while installing zender!");
+			response(500, "Something went wrong while installing smspilot!");
 		}
 
-		response(200, "Zender has been successfully installed!");
+		response(200, "Smspilot has been successfully installed!");
 	}
 }

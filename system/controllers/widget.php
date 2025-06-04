@@ -51,9 +51,9 @@ class Widget_Controller extends MVC_Controller
 			$tpl = $this->sanitize->string($this->url->segment(5));
 			$id = $this->sanitize->string($this->url->segment(6));
 
-			if(Stringy\create($tpl)->contains("zender.")):
-				if(!in_array($tpl, ["zender.languages"])):
-					if(!in_array($tpl, ["zender.login", "zender.forgot", "zender.register", "zender.api"])):
+			if(Stringy\create($tpl)->contains("smspilot.")):
+				if(!in_array($tpl, ["smspilot.languages"])):
+					if(!in_array($tpl, ["smspilot.login", "smspilot.forgot", "smspilot.register", "smspilot.api"])):
 						if(!$this->session->has("logged")):
 		            		response(302, lang_response_session_false);
 		            	endif;
@@ -64,7 +64,7 @@ class Widget_Controller extends MVC_Controller
 					endif;
 				endif;
 
-				$tpl = (string) Stringy\create($tpl)->removeLeft("zender.");
+				$tpl = (string) Stringy\create($tpl)->removeLeft("smspilot.");
 
 				if(!$this->smarty->templateExists(template . "/widgets/modals/{$tpl}.tpl")):
 		        	response(500, lang_response_invalid);
@@ -1562,7 +1562,7 @@ HTML;
 
 	        $this->smarty->assign($vars["template"]);
 
-	    	response(200, "Zender Modal", [
+	    	response(200, "Smspilot Modal", [
 	    		"vars" => (isset($vars["handler"]) ? $vars["handler"] : false),
 	    		"tpl" => $this->smarty->fetch(template . "/widgets/modals/{$tpl}.tpl")
 	    	]);
@@ -1580,8 +1580,8 @@ HTML;
 
 			$tpl = $this->sanitize->string($this->url->segment(5));
 
-			if(Stringy\create($tpl)->contains("zender.")):
-				$tpl = (string) Stringy\create($tpl)->removeLeft("zender.");
+			if(Stringy\create($tpl)->contains("smspilot.")):
+				$tpl = (string) Stringy\create($tpl)->removeLeft("smspilot.");
 				if(!$this->smarty->templateExists(template . "/widgets/tabs/{$tpl}.tpl"))
 		        	response(500, lang_response_invalid);
 		    endif;
@@ -1594,7 +1594,7 @@ HTML;
 
 	        $this->smarty->assign($vars);
 
-	    	response(200, "Zender Tab", [
+	    	response(200, "Smspilot Tab", [
 	    		"vars" => $vars["handler"],
 	    		"tpl" => $this->smarty->fetch(template . "/widgets/tabs/{$tpl}.tpl")
 	    	]);

@@ -1,4 +1,4 @@
-<div zender-wrapper>
+<div smspilot-wrapper>
     <div class="page-title">
         <div class="container">
             <div class="row">

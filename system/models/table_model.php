@@ -59,7 +59,7 @@ SELECT s.id AS id, s.did AS did, CONCAT(DATE_FORMAT(s.create_date, '%c/%e/%Y'), 
     CONCAT(
         IF(s.sim < 1, "SIM1", "SIM2"),
         '<br>',
-        '<a href=\"#\" zender-toggle=\"zender.view/sent-', s.id, '\">',
+        '<a href=\"#\" smspilot-toggle=\"smspilot.view/sent-', s.id, '\">',
             '<i class=\"la la-eye la-lg\"></i>&nbsp;',
             LENGTH(s.message),  ' bytes',
         '</a>'
@@ -67,7 +67,7 @@ SELECT s.id AS id, s.did AS did, CONCAT(DATE_FORMAT(s.create_date, '%c/%e/%Y'), 
     CONCAT(
         '<div class=\"table-buttons\">',
             '<div class=\"btn-group\">',
-                '<button class=\"btn btn-md btn-danger\" zender-delete=\"sent/', s.id ,'\">',
+                '<button class=\"btn btn-md btn-danger\" smspilot-delete=\"sent/', s.id ,'\">',
                     '<i class=\"la la-trash\"></i>',
                 '</button>',
             '</div>',
@@ -128,7 +128,7 @@ SELECT r.id AS id, r.did AS did, CONCAT(DATE_FORMAT(r.receive_date, '%c/%e/%Y'),
         r.phone
       ) AS phone,
     CONCAT(
-        '<a href=\"#\" zender-toggle=\"zender.view/received-', r.id, '\">',
+        '<a href=\"#\" smspilot-toggle=\"smspilot.view/received-', r.id, '\">',
             '<i class=\"la la-eye la-lg\"></i>&nbsp;',
             LENGTH(r.message),  ' bytes',
         '</a>'
@@ -136,7 +136,7 @@ SELECT r.id AS id, r.did AS did, CONCAT(DATE_FORMAT(r.receive_date, '%c/%e/%Y'),
     CONCAT(
         '<div class=\"table-buttons\">',
             '<div class=\"btn-group\">',
-                '<button class=\"btn btn-md btn-danger\" zender-delete=\"received/', r.id ,'\">',
+                '<button class=\"btn btn-md btn-danger\" smspilot-delete=\"received/', r.id ,'\">',
                     '<i class=\"la la-trash\"></i>',
                 '</button>',
             '</div>',
@@ -182,14 +182,14 @@ SELECT s.id AS id, s.did AS did, s.name AS name, IF(s.repeat < 2, "Yes", "No") A
         d.name
       )) AS device,
     CONCAT(
-        '<a href=\"#\" zender-toggle=\"zender.view/scheduledrecipients-', s.id, '\">',
+        '<a href=\"#\" smspilot-toggle=\"smspilot.view/scheduledrecipients-', s.id, '\">',
             '<i class=\"la la-address-book la-lg\"></i>&nbsp; View',
         '</a>'
       ) AS recipients,
     CONCAT(
         IF(s.sim < 1, "SIM1", "SIM2"),
         '<br>',
-        '<a href=\"#\" zender-toggle=\"zender.view/scheduled-', s.id, '\">',
+        '<a href=\"#\" smspilot-toggle=\"smspilot.view/scheduled-', s.id, '\">',
             '<i class=\"la la-eye la-lg\"></i>&nbsp;',
             LENGTH(s.message),  ' bytes',
         '</a>'
@@ -197,7 +197,7 @@ SELECT s.id AS id, s.did AS did, s.name AS name, IF(s.repeat < 2, "Yes", "No") A
     CONCAT(
         '<div class=\"table-buttons\">',
             '<div class=\"btn-group\">',
-                '<button class=\"btn btn-md btn-danger\" zender-delete=\"scheduled/', s.id ,'\">',
+                '<button class=\"btn btn-md btn-danger\" smspilot-delete=\"scheduled/', s.id ,'\">',
                     '<i class=\"la la-trash\"></i>',
                 '</button>',
             '</div>',
@@ -227,7 +227,7 @@ SQL;
         $query = <<<SQL
 SELECT id, uid, name,
     CONCAT(
-        '<a href=\"#\" zender-toggle=\"zender.view/templates-', id, '\">',
+        '<a href=\"#\" smspilot-toggle=\"smspilot.view/templates-', id, '\">',
             '<i class=\"la la-eye la-lg\"></i>&nbsp;',
             LENGTH(format),  ' bytes',
         '</a>'
@@ -235,10 +235,10 @@ SELECT id, uid, name,
     CONCAT(
         '<div class=\"table-buttons\">',
             '<div class=\"btn-group\">',
-                '<button class=\"btn btn-md btn-primary\" zender-toggle=\"zender.edit.template/', id ,'\">',
+                '<button class=\"btn btn-md btn-primary\" smspilot-toggle=\"smspilot.edit.template/', id ,'\">',
                     '<i class=\"la la-edit\"></i>',
                 '</button>',
-                '<button class=\"btn btn-md btn-danger\" zender-delete=\"templates/', id ,'\">',
+                '<button class=\"btn btn-md btn-danger\" smspilot-delete=\"templates/', id ,'\">',
                     '<i class=\"la la-trash\"></i>',
                 '</button>',
             '</div>',
@@ -269,10 +269,10 @@ SELECT c.id AS id, g.name AS "group", c.phone AS phone, c.name AS name,
     CONCAT(
         '<div class=\"table-buttons\">',
             '<div class=\"btn-group\">',
-                '<button class=\"btn btn-md btn-primary\" zender-toggle=\"zender.edit.contact/', c.id ,'\">',
+                '<button class=\"btn btn-md btn-primary\" smspilot-toggle=\"smspilot.edit.contact/', c.id ,'\">',
                     '<i class=\"la la-edit\"></i>',
                 '</button>',
-                '<button class=\"btn btn-md btn-danger\" zender-delete=\"contacts/', c.id ,'\">',
+                '<button class=\"btn btn-md btn-danger\" smspilot-delete=\"contacts/', c.id ,'\">',
                     '<i class=\"la la-trash\"></i>',
                 '</button>',
             '</div>',
@@ -304,10 +304,10 @@ SELECT g.id AS id, g.uid AS uid, g.name AS name, (SELECT COUNT(id) FROM contacts
     CONCAT(
         '<div class=\"table-buttons\">',
             '<div class=\"btn-group\">',
-                '<button class=\"btn btn-md btn-primary\" zender-toggle=\"zender.edit.group/', g.id ,'\">',
+                '<button class=\"btn btn-md btn-primary\" smspilot-toggle=\"smspilot.edit.group/', g.id ,'\">',
                     '<i class=\"la la-edit\"></i>',
                 '</button>',
-                '<button class=\"btn btn-md btn-danger\" zender-delete=\"groups/', g.id ,'\">',
+                '<button class=\"btn btn-md btn-danger\" smspilot-delete=\"groups/', g.id ,'\">',
                     '<i class=\"la la-trash\"></i>',
                 '</button>',
             '</div>',
@@ -348,7 +348,7 @@ SELECT id, uid, did, name, manufacturer, DATE_FORMAT(create_date, '%c/%e/%Y %l:%
     CONCAT(
         '<div class=\"table-buttons\">',
             '<div class=\"btn-group\">',
-                '<button class=\"btn btn-md btn-danger\" zender-delete=\"devices/', id ,'\">',
+                '<button class=\"btn btn-md btn-danger\" smspilot-delete=\"devices/', id ,'\">',
                     '<i class=\"la la-trash\"></i>',
                 '</button>',
             '</div>',
@@ -377,7 +377,7 @@ SQL;
         $query = <<<SQL
 SELECT k.id AS id, k.name AS name, IF(k.devices = "0", "Automatic", IF(group_concat(d.name ORDER BY FIND_IN_SET(d.did, k.devices) ASC SEPARATOR ', ') IS NULL, 'Removed', group_concat(d.name ORDER BY FIND_IN_SET(d.did, k.devices) ASC SEPARATOR ', '))) AS devices, DATE_FORMAT(k.create_date, '%c/%e/%Y %l:%i %p') AS create_date, UNIX_TIMESTAMP(k.create_date) AS sorting,
     CONCAT(
-        '<a href=\"#\" zender-view=\"keys/', k.id, '\">',
+        '<a href=\"#\" smspilot-view=\"keys/', k.id, '\">',
             '<i class=\"la la-eye la-lg\"></i>&nbsp;',
            (CHAR_LENGTH(k.permissions) - CHAR_LENGTH(REPLACE(k.permissions, ',', '')) + 1), ' selected',
         '</a>'
@@ -385,13 +385,13 @@ SELECT k.id AS id, k.name AS name, IF(k.devices = "0", "Automatic", IF(group_con
     CONCAT(
         '<div class=\"table-buttons\">',
             '<div class=\"btn-group\">',
-                '<button class=\"btn btn-md btn-secondary\" data-clipboard-text=\"', k.key, '\" zender-clipboard>',
+                '<button class=\"btn btn-md btn-secondary\" data-clipboard-text=\"', k.key, '\" smspilot-clipboard>',
                     '<i class=\"la la-key\"></i>',
                 '</button>',
-                '<button class=\"btn btn-md btn-primary\" zender-toggle=\"zender.edit.apikey/', k.id ,'\">',
+                '<button class=\"btn btn-md btn-primary\" smspilot-toggle=\"smspilot.edit.apikey/', k.id ,'\">',
                     '<i class=\"la la-edit\"></i>',
                 '</button>',
-                '<button class=\"btn btn-md btn-danger\" zender-delete=\"keys/', k.id ,'\">',
+                '<button class=\"btn btn-md btn-danger\" smspilot-delete=\"keys/', k.id ,'\">',
                     '<i class=\"la la-trash\"></i>',
                 '</button>',
             '</div>',
@@ -425,13 +425,13 @@ SELECT w.id AS id, w.name AS name, CONCAT(MID(w.url, 1, 20), '...') AS url, IF(w
     CONCAT(
         '<div class=\"table-buttons\">',
             '<div class=\"btn-group\">',
-                '<button class=\"btn btn-md btn-secondary\" data-clipboard-text=\"', w.secret, '\" zender-clipboard>',
+                '<button class=\"btn btn-md btn-secondary\" data-clipboard-text=\"', w.secret, '\" smspilot-clipboard>',
                     '<i class=\"la la-user-secret\"></i>',
                 '</button>',
-                '<button class=\"btn btn-md btn-primary\" zender-toggle=\"zender.edit.webhook/', w.id ,'\">',
+                '<button class=\"btn btn-md btn-primary\" smspilot-toggle=\"smspilot.edit.webhook/', w.id ,'\">',
                     '<i class=\"la la-edit\"></i>',
                 '</button>',
-                '<button class=\"btn btn-md btn-danger\" zender-delete=\"webhooks/', w.id ,'\">',
+                '<button class=\"btn btn-md btn-danger\" smspilot-delete=\"webhooks/', w.id ,'\">',
                     '<i class=\"la la-trash\"></i>',
                 '</button>',
             '</div>',
@@ -473,7 +473,7 @@ SELECT a.id AS id, a.name AS name, IF(a.devices = "0", "Automatic", IF(a.devices
     CONCAT(
         '<div class=\"table-buttons\">',
             '<div class=\"btn-group\">',
-                '<button class=\"btn btn-md btn-primary\" zender-toggle=\"zender.edit.',
+                '<button class=\"btn btn-md btn-primary\" smspilot-toggle=\"smspilot.edit.',
                     CASE
                         WHEN a.type < 2 THEN 'hook'
                         ELSE 'autoreply'
@@ -481,7 +481,7 @@ SELECT a.id AS id, a.name AS name, IF(a.devices = "0", "Automatic", IF(a.devices
                     ,'/', a.id ,'\">',
                     '<i class=\"la la-edit\"></i>',
                 '</button>',
-                '<button class=\"btn btn-md btn-danger\" zender-delete=\"actions/', a.id ,'\">',
+                '<button class=\"btn btn-md btn-danger\" smspilot-delete=\"actions/', a.id ,'\">',
                     '<i class=\"la la-trash\"></i>',
                 '</button>',
             '</div>',
@@ -521,7 +521,7 @@ SELECT u.id AS id, u.email AS email, u.name AS name, l.name AS language, CONCAT(
             '<div class=\"btn-group\">',
                 '<button class=\"btn btn-md btn-',
                     IF(u.suspended > 0, "success", "danger")
-                ,'\" user-id=\"', u.id ,'\" zender-action=\"', 
+                ,'\" user-id=\"', u.id ,'\" smspilot-action=\"', 
                     IF(u.suspended > 0, "unsuspend", "suspend")
                 ,'\"', 
                     IF(u.id < 2, " disabled", false)
@@ -530,15 +530,15 @@ SELECT u.id AS id, u.email AS email, u.name AS name, l.name AS language, CONCAT(
                     IF(u.suspended > 0, "check-circle", "ban")
                     ,'\"></i>',
                 '</button>',
-                '<button class=\"btn btn-md btn-warning\" user-id=\"', u.id ,'\" zender-action=\"impersonate\"', 
+                '<button class=\"btn btn-md btn-warning\" user-id=\"', u.id ,'\" smspilot-action=\"impersonate\"', 
                     IF(u.id < 2, " disabled", false)
                 ,'>',
                     '<i class=\"la la-sign-in\"></i>',
                 '</button>',
-                '<button class=\"btn btn-md btn-primary\" zender-toggle=\"zender.edit.user/', u.id ,'\">',
+                '<button class=\"btn btn-md btn-primary\" smspilot-toggle=\"smspilot.edit.user/', u.id ,'\">',
                     '<i class=\"la la-edit\"></i>',
                 '</button>',
-                '<button class=\"btn btn-md btn-danger\" zender-delete=\"users/', u.id ,'\">',
+                '<button class=\"btn btn-md btn-danger\" smspilot-delete=\"users/', u.id ,'\">',
                     '<i class=\"la la-trash\"></i>',
                 '</button>',
             '</div>',
@@ -570,7 +570,7 @@ SELECT id, name,
             'No Permissions'
         )
         ELSE CONCAT(
-            '<a href=\"#\" zender-view=\"roles/', id ,'\">',
+            '<a href=\"#\" smspilot-view=\"roles/', id ,'\">',
                 '<i class=\"la la-eye la-lg\"></i>&nbsp;',
                 (CHAR_LENGTH(permissions) - CHAR_LENGTH(REPLACE(permissions, ',', '')) + 1), ' selected',
             '</a>'
@@ -579,10 +579,10 @@ SELECT id, name,
     CONCAT(
         '<div class=\"table-buttons\">',
             '<div class=\"btn-group\">',
-                '<button class=\"btn btn-md btn-primary\" zender-toggle=\"zender.edit.role/', id ,'\"', IF(id < 2, " disabled", ""), '>',
+                '<button class=\"btn btn-md btn-primary\" smspilot-toggle=\"smspilot.edit.role/', id ,'\"', IF(id < 2, " disabled", ""), '>',
                     '<i class=\"la la-edit\"></i>',
                 '</button>',
-                '<button class=\"btn btn-md btn-danger\" zender-delete=\"roles/', id ,'\"', IF(id < 2, " disabled", ""), '>',
+                '<button class=\"btn btn-md btn-danger\" smspilot-delete=\"roles/', id ,'\"', IF(id < 2, " disabled", ""), '>',
                     '<i class=\"la la-trash\"></i>',
                 '</button>',
             '</div>',
@@ -610,10 +610,10 @@ SELECT p.id AS id, FORMAT(p.send_limit, 0) AS send, FORMAT(p.receive_limit, 0) A
     CONCAT(
         '<div class=\"table-buttons\">',
             '<div class=\"btn-group\">',
-                '<button class=\"btn btn-md btn-primary\" zender-toggle=\"zender.edit.package/', p.id ,'\">',
+                '<button class=\"btn btn-md btn-primary\" smspilot-toggle=\"smspilot.edit.package/', p.id ,'\">',
                     '<i class=\"la la-edit\"></i>',
                 '</button>',
-                '<button class=\"btn btn-md btn-danger\" zender-delete=\"packages/', p.id ,'\">',
+                '<button class=\"btn btn-md btn-danger\" smspilot-delete=\"packages/', p.id ,'\">',
                     '<i class=\"la la-trash\"></i>',
                 '</button>',
             '</div>',
@@ -641,10 +641,10 @@ SELECT v.id AS id, v.name AS name, p.name AS package, CONCAT(DATE_FORMAT(v.creat
     CONCAT(
         '<div class=\"table-buttons\">',
             '<div class=\"btn-group\">',
-                '<button class=\"btn btn-md btn-secondary\" data-clipboard-text=\"', v.code, '\" zender-clipboard>',
+                '<button class=\"btn btn-md btn-secondary\" data-clipboard-text=\"', v.code, '\" smspilot-clipboard>',
                     '<i class=\"la la-wallet\"></i>',
                 '</button>',
-                '<button class=\"btn btn-md btn-danger\" zender-delete=\"vouchers/', v.id ,'\">',
+                '<button class=\"btn btn-md btn-danger\" smspilot-delete=\"vouchers/', v.id ,'\">',
                     '<i class=\"la la-trash\"></i>',
                 '</button>',
             '</div>',
@@ -673,7 +673,7 @@ SELECT s.id AS id, u.name AS name, p.name AS package, IF(p.price < 1, 'Free', CO
     CONCAT(
         '<div class=\"table-buttons\">',
             '<div class=\"btn-group\">',
-                '<button class=\"btn btn-md btn-danger\" zender-delete=\"subscriptions/', s.id ,'\">',
+                '<button class=\"btn btn-md btn-danger\" smspilot-delete=\"subscriptions/', s.id ,'\">',
                     '<i class=\"la la-trash\"></i>',
                 '</button>',
             '</div>',
@@ -744,16 +744,16 @@ SELECT id, name, CONCAT(DATE_FORMAT(create_date, '%c/%e/%Y'), '<br>', DATE_FORMA
                 '<button class=\"btn btn-md btn-secondary\" data-clipboard-text=\'',
                     CASE
                         WHEN type = 1 THEN CONCAT('{_block(\"', MD5(id), '\")}')
-                        WHEN type = 2 THEN CONCAT('zender-toggle=\"', MD5(id), '\"')
-                        ELSE CONCAT('zender-toggle=\"', MD5(id), '\"')
+                        WHEN type = 2 THEN CONCAT('smspilot-toggle=\"', MD5(id), '\"')
+                        ELSE CONCAT('smspilot-toggle=\"', MD5(id), '\"')
                     END,
-                    '\' zender-clipboard>',
+                    '\' smspilot-clipboard>',
                     '<i class=\"la la-clipboard\"></i>',
                 '</button>',
-                '<button class=\"btn btn-md btn-primary\" zender-toggle=\"zender.edit.widget/', id ,'\">',
+                '<button class=\"btn btn-md btn-primary\" smspilot-toggle=\"smspilot.edit.widget/', id ,'\">',
                     '<i class=\"la la-edit\"></i>',
                 '</button>',
-                '<button class=\"btn btn-md btn-danger\" zender-delete=\"widgets/', id ,'\">',
+                '<button class=\"btn btn-md btn-danger\" smspilot-delete=\"widgets/', id ,'\">',
                     '<i class=\"la la-trash\"></i>',
                 '</button>',
             '</div>',
@@ -782,14 +782,14 @@ SELECT p.id AS id, IF(p.logged < 1, 'No', 'Yes') AS logged, p.name AS name, p.co
         '<div class=\"table-buttons\">',
             '<div class=\"btn-group\">',
                 '<button class=\"btn btn-md btn-secondary\" data-clipboard-text=\'',
-                    CONCAT('zender-page=\"', p.id, '/', p.slug, '\"'),
-                    '\' zender-clipboard>',
+                    CONCAT('smspilot-page=\"', p.id, '/', p.slug, '\"'),
+                    '\' smspilot-clipboard>',
                     '<i class=\"la la-clipboard\"></i>',
                 '</button>',
-                '<button class=\"btn btn-md btn-primary\" zender-toggle=\"zender.edit.page/', p.id ,'\">',
+                '<button class=\"btn btn-md btn-primary\" smspilot-toggle=\"smspilot.edit.page/', p.id ,'\">',
                     '<i class=\"la la-edit\"></i>',
                 '</button>',
-                '<button class=\"btn btn-md btn-danger\" zender-delete=\"pages/', p.id ,'\">',
+                '<button class=\"btn btn-md btn-danger\" smspilot-delete=\"pages/', p.id ,'\">',
                     '<i class=\"la la-trash\"></i>',
                 '</button>',
             '</div>',
@@ -819,10 +819,10 @@ SELECT id, iso, name, CONCAT(LENGTH(translations), ' bytes') AS size, CONCAT(DAT
     CONCAT(
         '<div class=\"table-buttons\">',
             '<div class=\"btn-group\">',
-                '<button class=\"btn btn-md btn-primary\" zender-toggle=\"zender.edit.language/', id ,'\">',
+                '<button class=\"btn btn-md btn-primary\" smspilot-toggle=\"smspilot.edit.language/', id ,'\">',
                     '<i class=\"la la-edit\"></i>',
                 '</button>',
-                '<button class=\"btn btn-md btn-danger\" zender-delete=\"languages/', id ,'\">',
+                '<button class=\"btn btn-md btn-danger\" smspilot-delete=\"languages/', id ,'\">',
                     '<i class=\"la la-trash\"></i>',
                 '</button>',
             '</div>',

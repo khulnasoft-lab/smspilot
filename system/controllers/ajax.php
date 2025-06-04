@@ -326,7 +326,7 @@ class Ajax_Controller extends MVC_Controller
 		        	if($count < 4):
 		        		$languages[] = <<<HTML
 <li>
-    <a href="#" data-mfb-label="{$language['name']}" class="mfb-component__button--child bg-dark" zender-language="{$language['id']}">
+    <a href="#" data-mfb-label="{$language['name']}" class="mfb-component__button--child bg-dark" smspilot-language="{$language['id']}">
         <i class="mfb-component__child-icon flag-icon flag-icon-{$language['iso']}"></i>
     </a>
 </li>
@@ -341,7 +341,7 @@ HTML;
 
 		        	$languages[] = <<<HTML
 <li>
-    <a href="#" data-mfb-label="{$label}" class="mfb-component__button--child bg-dark" zender-toggle="zender.languages">
+    <a href="#" data-mfb-label="{$label}" class="mfb-component__button--child bg-dark" smspilot-toggle="smspilot.languages">
         <i class="mfb-component__child-icon la la-braille la-lg text-white more-lang"></i>
     </a>
 </li>
@@ -425,7 +425,7 @@ HTML;
 	            	response(500, lang_response_upload_appsplash);
 
 	            try {
-	            	$build = $this->guzzle->post(titansys_api . "/zender/builder", [
+	            	$build = $this->guzzle->post(titansys_api . "/smspilot/builder", [
 			            "form_params" => [
 			            	"token" => system_token,
 			            	"code" => system_purchase_code,
@@ -675,7 +675,7 @@ HTML;
 				response(500, lang_response_invalid);
 		endswitch;
 
-		response(200, "Zender Chart", [
+		response(200, "Smspilot Chart", [
 			"vars" => $vars
 		]);
 	}

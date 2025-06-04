@@ -1,4 +1,4 @@
-<form zender-form>
+<form smspilot-form>
     <div class="modal-content">
         <div class="modal-header">
             <h3 class="modal-title">
@@ -12,7 +12,7 @@
         
         <div class="modal-body">
             <div class="mb-3">
-                <zender-creditcard></zender-creditcard>
+                <smspilot-creditcard></smspilot-creditcard>
             </div>
 
             <div class="p-3">

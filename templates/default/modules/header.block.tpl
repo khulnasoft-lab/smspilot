@@ -1,9 +1,9 @@
-<header class="header" zender-navbar>
+<header class="header" smspilot-navbar>
     <div class="container">
         <nav class="navbar">
             <div class="container navbar-wrap">
                 <div class="navbar-left">
-                    <a href="{site_url}" zender-nav>{logo("landing", "
+                    <a href="{site_url}" smspilot-nav>{logo("landing", "
                         <div class=\"top-logo\">
                             <i class=\"la la-telegram\"></i>
                             <span class=\"d-none d-sm-inline\">
@@ -17,22 +17,22 @@
                     <div class="mobile-menu">
                         <ul>
                             <li>
-                                <a href="#features" zender-scroll>
+                                <a href="#features" smspilot-scroll>
                                     <i class="la la-tools la-lg"></i> {lang_landing_nav_features}
                                 </a>
                             </li>
                             <li>
-                                <a href="#pricing" zender-scroll>
+                                <a href="#pricing" smspilot-scroll>
                                     <i class="la la-coins la-lg"></i> {lang_landing_nav_pricing}
                                 </a>
                             </li>
                             <li>
-                                <a href="#clients" zender-scroll>
+                                <a href="#clients" smspilot-scroll>
                                     <i class="la la-user-friends la-lg"></i> {lang_landing_nav_clients}
                                 </a>
                             </li>
                             <li>
-                                <a href="#" zender-toggle="zender.login">
+                                <a href="#" smspilot-toggle="smspilot.login">
                                     <i class="la la-user-circle la-lg"></i> {lang_landing_nav_login}
                                 </a>
                             </li>
@@ -41,27 +41,27 @@
 
                     <ul class="top-menu">
                         <li>
-                            <a href="#features" zender-scroll>
+                            <a href="#features" smspilot-scroll>
                                 <i class="la la-tools la-lg"></i> {lang_landing_nav_features}
                             </a>
                         </li>
                         <li>
-                            <a href="#pricing" zender-scroll>
+                            <a href="#pricing" smspilot-scroll>
                                 <i class="la la-coins la-lg"></i> {lang_landing_nav_pricing}
                             </a>
                         </li>
                         <li>
-                            <a href="#clients" zender-scroll>
+                            <a href="#clients" smspilot-scroll>
                                 <i class="la la-user-friends la-lg"></i> {lang_landing_nav_clients}
                             </a>
                         </li>
                         <li>
-                            <a href="#" zender-toggle="zender.api">
+                            <a href="#" smspilot-toggle="smspilot.api">
                                 <i class="la la-terminal la-lg"></i> {lang_landing_nav_api}
                             </a>
                         </li>
                         <li>
-                            <a href="#" class="btn btn-primary btn-lg text-uppercase" zender-toggle="zender.login">
+                            <a href="#" class="btn btn-primary btn-lg text-uppercase" smspilot-toggle="smspilot.login">
                                 <i class="la la-user-circle la-lg"></i> {lang_landing_nav_login}
                             </a>
                         </li>
@@ -102,7 +102,7 @@
 
                         {if system_registrations < 2}
                         <div class="flex start center header-btns">
-                            <button class="btn btn-primary btn-lg text-uppercase mr-3 mb-1 mr-0-sm" zender-toggle="zender.register">
+                            <button class="btn btn-primary btn-lg text-uppercase mr-3 mb-1 mr-0-sm" smspilot-toggle="smspilot.register">
                                 <i class="la la-edit la-lg"></i> {lang_landing_lead_btn}
                             </button>
                         </div>

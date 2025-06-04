@@ -5,7 +5,7 @@
 
     <div class="card-body">
         <div class="embed-responsive">
-            <iframe class="embed-responsive-item position-relative" scrolling="no" zender-iframe="{site_url}/api"></iframe>
+            <iframe class="embed-responsive-item position-relative" scrolling="no" smspilot-iframe="{site_url}/api"></iframe>
         </div>
     </div>
 </div>

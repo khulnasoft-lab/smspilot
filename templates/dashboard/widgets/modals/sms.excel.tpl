@@ -1,4 +1,4 @@
-<form zender-form>
+<form smspilot-form>
     <div class="modal-content">
         <div class="modal-header">
             <h3 class="modal-title">
@@ -15,7 +15,7 @@
                 <div class="form-group col-12">
                     <label>{lang_form_excelfile}</label>
                     <small class="text-danger">
-                        {lang_form_followformat} <a href="#" zender-toggle="zender.view/excel-1">{lang_form_clickhere}</a>
+                        {lang_form_followformat} <a href="#" smspilot-toggle="smspilot.view/excel-1">{lang_form_clickhere}</a>
                     </small>
                     <input type="file" name="excel" class="form-control pb-5">
                 </div>

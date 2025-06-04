@@ -25,8 +25,8 @@
         <p class="pl-3 text-justify">
             {lang_form_adddevice_five}
 
-            <div id="zender-qrcode">
-                <script>zender.qrcode("{$data.hash}", 220, 220);</script>
+            <div id="smspilot-qrcode">
+                <script>smspilot.qrcode("{$data.hash}", 220, 220);</script>
             </div>
         </p>
 

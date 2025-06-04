@@ -14,9 +14,9 @@ services:
     image: mysql:8.0
     environment:
       MYSQL_ROOT_PASSWORD: rootpass
-      MYSQL_DATABASE: zender_db
-      MYSQL_USER: zender
-      MYSQL_PASSWORD: zenderpass
+      MYSQL_DATABASE: smspilot_db
+      MYSQL_USER: smspilot
+      MYSQL_PASSWORD: smspilotpass
     ports:
       - "3306:3306"
     command: --default-authentication-plugin=mysql_native_password --character-set-server=utf8mb4 --collation-server=utf8mb4_unicode_ci
