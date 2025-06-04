@@ -31,7 +31,7 @@
         "ext-bcmath": "*",
         "ext-gmp": "*",
         "ext-intl": "*",
-        "cache/taggable-cache": "^0.4.0",
+        "cache/taggable-cache": "^0.5.0",
         "doctrine/instantiator": "^1.0.5",
         "florianv/exchanger": "^1.0",
         "florianv/swap": "^3.0",
