@@ -1,0 +1,26 @@
+services:
+  - type: web
+    name: smspilot
+    env: docker
+    plan: free
+    region: oregon
+    rootDir: .
+    dockerfilePath: Dockerfile
+    envVars:
+      - key: DB_HOST
+        sync: false
+      - key: DB_PORT
+        sync: false
+      - key: DB_NAME
+        sync: false
+      - key: DB_USER
+        sync: false
+      - key: DB_PASS
+        sync: false
+    autoDeploy: true
+
+databases:
+  - name: smspilot-db
+    plan: free
+    region: oregon
+    postgresMajorVersion: "14"
