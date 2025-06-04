@@ -43,7 +43,7 @@ return array (
   ),
   'mobile' => 
   array (
-    'NationalNumberPattern' => '2[0-27-9]\\d{7,8}|21\\d{6}',
+    'NationalNumberPattern' => '2(?:[0-27-9]\\d|6)\\d{6,7}|2(?:1\\d|75)\\d{5}',
     'ExampleNumber' => '211234567',
     'PossibleLength' => 
     array (
@@ -71,7 +71,7 @@ return array (
   ),
   'premiumRate' => 
   array (
-    'NationalNumberPattern' => '(?:11\\d{5}|50(?:0[08]|30|66|77))\\d{3}|90\\d{6,8}',
+    'NationalNumberPattern' => '(?:11\\d{5}|50(?:0[08]|30|66|77|88))\\d{3}|90\\d{6,8}',
     'ExampleNumber' => '900123456',
     'PossibleLength' => 
     array (
@@ -118,8 +118,8 @@ return array (
   ),
   'pager' => 
   array (
-    'NationalNumberPattern' => '[28]6\\d{6,7}',
-    'ExampleNumber' => '26123456',
+    'NationalNumberPattern' => '86\\d{6,7}',
+    'ExampleNumber' => '86123456',
     'PossibleLength' => 
     array (
       0 => 8,
@@ -131,7 +131,7 @@ return array (
   ),
   'uan' => 
   array (
-    'NationalNumberPattern' => '83\\d{3,8}',
+    'NationalNumberPattern' => '8(?:1[6-9]|22|3\\d|4[045]|5[459]|7[0-3579]|90)\\d{2,7}',
     'ExampleNumber' => '83012378',
     'PossibleLength' => 
     array (
@@ -175,7 +175,7 @@ return array (
       'format' => '$1 $2',
       'leadingDigitsPatterns' => 
       array (
-        0 => '83',
+        0 => '8[1-579]',
       ),
       'nationalPrefixFormattingRule' => '0$1',
       'domesticCarrierCodeFormattingRule' => '',
@@ -187,7 +187,8 @@ return array (
       'format' => '$1 $2 $3',
       'leadingDigitsPatterns' => 
       array (
-        0 => '50[0367]|[89]0',
+        0 => '50[036-8]|[89]0',
+        1 => '50(?:[0367]|88)|[89]0',
       ),
       'nationalPrefixFormattingRule' => '0$1',
       'domesticCarrierCodeFormattingRule' => '',
@@ -196,7 +197,7 @@ return array (
     2 => 
     array (
       'pattern' => '(\\d)(\\d{3})(\\d{4})',
-      'format' => '$1-$2 $3',
+      'format' => '$1 $2 $3',
       'leadingDigitsPatterns' => 
       array (
         0 => '24|[346]|7[2-57-9]|9[2-9]',
@@ -246,6 +247,5 @@ return array (
   array (
   ),
   'mainCountryForCode' => false,
-  'leadingZeroPossible' => false,
   'mobileNumberPortableRegion' => true,
 );

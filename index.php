@@ -1,6 +1,6 @@
 <?php
 /**
- * Zender - Android Mobile Devices as SMS Gateway (SaaS Platform)
+ * Zender - Ultimate Messaging Platform for SMS and WhatsApp, use your Android Devices as SMS Gateways (SaaS)
  * @author Titan Systems <mail@titansystems.ph>
  */ 
 
@@ -13,7 +13,7 @@
     /**
      * Start Session
      */
-
+    
     session_start();
 
     /**

@@ -1,6 +1,6 @@
 <?php
 
-use Box\Spout\Reader\Common\Creator\ReaderEntityFactory;
+use OpenSpout\Reader\Common\Creator\ReaderEntityFactory;
 
 class MVC_Library_Sheets 
 {

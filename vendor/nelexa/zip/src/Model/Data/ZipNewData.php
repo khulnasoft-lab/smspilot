@@ -1,5 +1,14 @@
 <?php
 
+declare(strict_types=1);
+
+/*
+ * This file is part of the nelexa/zip package.
+ * (c) Ne-Lexa <https://github.com/Ne-Lexa/php-zip>
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
 namespace PhpZip\Model\Data;
 
 use PhpZip\Model\ZipData;
@@ -17,19 +26,16 @@ class ZipNewData implements ZipData
      *
      * @var array<int, int> array of resource ids and the number of class clones
      */
-    private static $guardClonedStream = [];
+    private static array $guardClonedStream = [];
 
-    /** @var ZipEntry */
-    private $zipEntry;
+    private ZipEntry $zipEntry;
 
     /** @var resource */
     private $stream;
 
     /**
-     * ZipStringData constructor.
-     *
-     * @param ZipEntry        $zipEntry
-     * @param string|resource $data
+     * @param string|resource $data Raw string data or resource
+     * @noinspection PhpMissingParamTypeInspection
      */
     public function __construct(ZipEntry $zipEntry, $data)
     {
@@ -39,7 +45,9 @@ class ZipNewData implements ZipData
             $zipEntry->setUncompressedSize(\strlen($data));
 
             if (!($handle = fopen('php://temp', 'w+b'))) {
-                throw new \RuntimeException('Temp resource can not open from write.');
+                // @codeCoverageIgnoreStart
+                throw new \RuntimeException('A temporary resource cannot be opened for writing.');
+                // @codeCoverageIgnoreEnd
             }
             fwrite($handle, $data);
             rewind($handle);
@@ -49,10 +57,10 @@ class ZipNewData implements ZipData
         }
 
         $resourceId = (int) $this->stream;
-        self::$guardClonedStream[$resourceId] =
-            isset(self::$guardClonedStream[$resourceId]) ?
-                self::$guardClonedStream[$resourceId] + 1 :
-                0;
+        self::$guardClonedStream[$resourceId]
+            = isset(self::$guardClonedStream[$resourceId])
+                ? self::$guardClonedStream[$resourceId] + 1
+                : 0;
     }
 
     /**
@@ -61,7 +69,7 @@ class ZipNewData implements ZipData
     public function getDataAsStream()
     {
         if (!\is_resource($this->stream)) {
-            throw new \LogicException(sprintf('Resource was closed (entry=%s).', $this->zipEntry->getName()));
+            throw new \LogicException(sprintf('Resource has been closed (entry=%s).', $this->zipEntry->getName()));
         }
 
         return $this->stream;
@@ -70,7 +78,7 @@ class ZipNewData implements ZipData
     /**
      * @return string returns data as string
      */
-    public function getDataAsString()
+    public function getDataAsString(): string
     {
         $stream = $this->getDataAsStream();
         $pos = ftell($stream);
@@ -87,7 +95,7 @@ class ZipNewData implements ZipData
     /**
      * @param resource $outStream
      */
-    public function copyDataToStream($outStream)
+    public function copyDataToStream($outStream): void
     {
         $stream = $this->getDataAsStream();
         rewind($stream);
@@ -100,10 +108,10 @@ class ZipNewData implements ZipData
     public function __clone()
     {
         $resourceId = (int) $this->stream;
-        self::$guardClonedStream[$resourceId] =
-            isset(self::$guardClonedStream[$resourceId]) ?
-                self::$guardClonedStream[$resourceId] + 1 :
-                1;
+        self::$guardClonedStream[$resourceId]
+            = isset(self::$guardClonedStream[$resourceId])
+                ? self::$guardClonedStream[$resourceId] + 1
+                : 1;
     }
 
     /**

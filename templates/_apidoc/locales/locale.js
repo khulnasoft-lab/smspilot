@@ -1,17 +1,12 @@
 define([
     api_template + '/locales/ca.js',
-    api_template + '/locales/cs.js',
     api_template + '/locales/de.js',
     api_template + '/locales/es.js',
     api_template + '/locales/fr.js',
-    api_template + '/locales/it.js',
     api_template + '/locales/nl.js',
     api_template + '/locales/pl.js',
     api_template + '/locales/pt_br.js',
-    api_template + '/locales/ro.js',
     api_template + '/locales/ru.js',
-    api_template + '/locales/tr.js',
-    api_template + '/locales/vi.js',
     api_template + '/locales/zh.js',
     api_template + '/locales/zh_cn.js'
 ], function() {
@@ -23,10 +18,10 @@ define([
         for (property in arguments[index])
             locales[property] = arguments[index][property];
     }
-    if (!locales['en'])
+    if ( ! locales['en'])
         locales['en'] = {};
 
-    if (!locales[langId] && !locales[language])
+    if ( ! locales[langId] && ! locales[language])
         language = 'en';
 
     var locale = (locales[langId] ? locales[langId] : locales[language]);
@@ -43,9 +38,9 @@ define([
     }
 
     return {
-        __: __,
-        locales: locales,
-        locale: locale,
+        __         : __,
+        locales    : locales,
+        locale     : locale,
         setLanguage: setLanguage
     };
 });

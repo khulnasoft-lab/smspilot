@@ -29,4 +29,13 @@ class MVC_Library_File
 	{
 		return rename($old, $new);
 	}
+
+	public function mkdir($path)
+	{
+		if(!is_dir($path)):
+			mkdir($path, 0775, true);
+		else:
+			return false;
+		endif;
+	}
 }

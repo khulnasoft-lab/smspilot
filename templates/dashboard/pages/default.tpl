@@ -1,30 +1,46 @@
-<div zender-wrapper>
+<div class="container-fluid" zender-wrapper>
+    {include "../modules/analytics.block.tpl"}
+
     <div class="page-title">
         <div class="container">
             <div class="row">
                 <div class="col-12">
-                    <div class="float-left">
-                        <h1>
-                            <i class="la la-chart-bar la-lg"></i>
-                            <span class="d-none d-sm-inline">{lang_dashboard_default_title}</span>
-                        </h1>
+                    <div class="{if !isMobile}float-left{else}text-center{/if}">
+                        {if system_freemodel < 2}
+                        <button class="btn btn-lg btn-primary" zender-toggle="zender.user.subscription">
+                            <i class="la la-crown la-lg"></i>
+                            <span class="d-none d-sm-inline">{__("lang_dashboard_nav_menusubscription")}</span>
+                        </button>
+                        {else}
+                        {if !empty($data.package)}
+                        <button class="btn btn-lg btn-primary" zender-toggle="zender.user.subscription">
+                            <i class="la la-crown la-lg"></i>
+                            <span class="d-none d-sm-inline">{__("lang_dashboard_nav_menusubscription")}</span>
+                        </button>
+                        {/if}
+                        {/if}
+
+                        <button class="btn btn-lg btn-primary" zender-toggle="zender.packages">
+                            <i class="la la-cubes la-lg"></i>
+                            <span class="d-none d-sm-inline">{__("lang_btn_packages")}</span>
+                        </button>
+
+                        <button class="btn btn-lg btn-primary" zender-toggle="zender.redeem">
+                            <i class="la la-ticket la-lg"></i>
+                            <span class="d-none d-sm-inline">{__("lang_btn_redeem")}</span>
+                        </button>
                     </div>
 
-                    <div class="float-right">
-                        <button class="btn btn-lg btn-primary" zender-toggle="zender.sms.quick">
-                            <i class="la la-telegram la-lg"></i>
-                            <span class="d-none d-sm-inline">{lang_dashboard_btn_smsquick}</span>
-                        </button>
+                    <div class="{if !isMobile}float-right{else}text-center mt-2{/if}">
+                        <a href="{site_url("dashboard/rates")}" class="btn btn-lg btn-primary" zender-nav>
+                            <i class="la la-comments-dollar la-lg"></i>
+                            <span class="d-none d-sm-inline">{__("lang_and_dashboard_pages_defailt_line37")}</span>
+                        </a>
 
-                        <button class="btn btn-lg btn-primary" zender-toggle="zender.add.contact">
-                            <i class="la la-address-book la-lg"></i>
-                            <span class="d-none d-sm-inline">{lang_dashboard_btn_addcontact}</span>
-                        </button>
-
-                        <button class="btn btn-lg btn-primary" zender-toggle="zender.add.device">
-                            <i class="la la-android la-lg"></i>
-                            <span class="d-none d-sm-inline">{lang_dashboard_btn_adddevice}</span>
-                        </button>
+                        <a href="{site_url("dashboard/docs")}" class="btn btn-lg btn-primary" zender-nav>
+                            <i class="la la-book la-lg"></i>
+                            <span class="d-none d-sm-inline">{__("lang_and_dashboard_pages_default_line42")}</span>
+                        </a>
                     </div>
                 </div>
             </div>
@@ -33,219 +49,215 @@
 
     <div class="container">
         <div class="row">
-            <div class="col-lg-9">
+            {if !isMobile}
+            <div class="col-9">
                 <div class="card animated fadeIn">
                     <div class="card-header border-0">
                         <h2>
-                            <i class="la la-chart-line"></i> 
-                            {lang_dashboard_default_summarytitle}
+                            <i class="la la-mail-bulk la-lg"></i> 
+                            {__("lang_and_dashboard_pages_default_line58")}
                         </h2>
-                        <h4 class="text-success">{lang_dashboard_default_summarysubtitle}</h4>
+                        <h4 class="text-primary">{__("lang_and_dashboard_pages_default_line60")}</h4>
                     </div>
 
-                    <div class="card-body pt-0">
+                    <div class="card-body pt-0 pb-0">
                         <div class="embed-responsive">
-                            <iframe class="embed-responsive-item position-relative" zender-iframe="{site_url}/widget/chart/dashboard.default"></iframe>
-                        </div>
-
-                        <div class="text-center">
-                            <div class="row">
-                                <div class="col-xl-3 col-6">
-                                    <h4 class="mb-1 text-uppercase">
-                                        <i class="la la-telegram la-lg"></i> {lang_dashboard_default_summarysent}
-                                    </h4>
-                                    <h4>{$data.total.sent}</h4>
-                                </div>
-                                
-                                <div class="col-xl-3 col-6">
-                                    <h4 class="mb-1 text-uppercase">
-                                        <i class="la la-sms la-lg"></i> {lang_dashboard_default_summaryreceived}
-                                    </h4>
-                                    <h4>{$data.total.received}</h4>
-                                </div>
-
-                                <div class="col-xl-3 col-6">
-                                    <h4 class="mb-1 text-uppercase">
-                                        <i class="la la-key la-lg"></i> {lang_dashboard_default_summarykeys}
-                                    </h4>
-                                    <h4>{$data.subscription.used.keys}</h4>
-                                </div>
-
-                                <div class="col-xl-3 col-6">
-                                    <h4 class="mb-1 text-uppercase">
-                                        <i class="la la-code-branch la-lg"></i> {lang_dashboard_default_summaryhooks}
-                                    </h4>
-                                    <h4>{$data.subscription.used.webhooks}</h4>
-                                </div>
-                            </div>
+                            <iframe class="embed-responsive-item position-relative" zender-iframe="{site_url}/widget/chart/dashboard.messages"></iframe>
                         </div>
                     </div>
                 </div>
 
-                {_block("1679091c5a880faf6fb5e6087eb1b2dc")}
-
-                <div class="row">
-                    <div class="col-lg-6">
-                        <div class="card">
-                            <div class="card-header border-0 pb-0">
-                                <h4 class="card-title">
-                                    <i class="la la-telegram"></i> {lang_dashboard_default_lastsent}
-                                </h4>
-                                <a href="{site_url("dashboard/messages")}" zender-nav>
-                                    {lang_dashboard_default_viewall}
-                                </a>
-                            </div>
-                            <div class="card-body">
-                                <div class="table-responsive">
-                                    <table class="table mb-0">
-                                        <tbody class="text-center">
-                                            {if !empty($data.recent.sent)}
-                                                {foreach $data.recent.sent as $sent}
-                                                <tr>
-                                                    <td>
-                                                        {$sent.name}<br>
-                                                        {$sent.phone}
-                                                    </td>
-                                                    <td>
-                                                        {$sent.device}<br>
-                                                        {$sent.message}
-                                                    </td>
-                                                    <td>{$sent.create_date}</td>
-                                                </tr>
-                                                {/foreach}
-                                            {else}
-                                            <tr>
-                                                <td class="text-center">
-                                                    {lang_dashboard_default_nothinghere}
-                                                </td>
-                                            </tr>
-                                            {/if}
-                                        </tbody>
-                                    </table>
-                                </div>
-                            </div>
-                        </div>
+                <div class="card animated fadeIn">
+                    <div class="card-header border-0">
+                        <h2>
+                            <i class="la la-chart-line la-lg"></i> 
+                            {__("lang_and_dashboard_pages_default_line74")}
+                        </h2>
+                        <h4 class="text-primary">{__("lang_and_dashboard_pages_default_line76")}</h4>
                     </div>
 
-                    <div class="col-lg-6">
-                        <div class="card">
-                            <div class="card-header border-0 pb-0">
-                                <h4 class="card-title">
-                                    <i class="la la-sms"></i> {lang_dashboard_default_lastreceived}
-                                </h4>
-                                <a href="{site_url("dashboard/messages")}" zender-nav>
-                                    {lang_dashboard_default_viewall}
-                                </a>
-                            </div>
-                            <div class="card-body">
-                                <div class="table-responsive">
-                                    <table class="table mb-0">
-                                        <tbody class="text-center">
-                                            {if !empty($data.recent.received)}
-                                                {foreach $data.recent.received as $sent}
-                                                <tr>
-                                                    <td>
-                                                        {$sent.name}<br>
-                                                        {$sent.phone}
-                                                    </td>
-                                                    <td>
-                                                        {$sent.device}<br>
-                                                        {$sent.message}
-                                                    </td>
-                                                    <td>{$sent.receive_date}</td>
-                                                </tr>
-                                                {/foreach}
-                                            {else}
-                                            <tr>
-                                                <td class="text-center">
-                                                    {lang_dashboard_default_nothinghere}
-                                                </td>
-                                            </tr>
-                                            {/if}
-                                        </tbody>
-                                    </table>
-                                </div>
-                            </div>
+                    <div class="card-body pt-0 pb-0">
+                        <div class="embed-responsive">
+                            <iframe class="embed-responsive-item position-relative" zender-iframe="{site_url}/widget/chart/dashboard.events"></iframe>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card animated fadeIn">
+                    <div class="card-header border-0">
+                        <h2>
+                            <i class="la la-tools la-lg"></i> 
+                            {__("lang_and_dashboard_pages_default_line90")}
+                        </h2>
+                        <h4 class="text-primary">{__("lang_and_dashboard_pages_default_line92")}</h4>
+                    </div>
+
+                    <div class="card-body pt-0 pb-0">
+                        <div class="embed-responsive">
+                            <iframe class="embed-responsive-item position-relative" zender-iframe="{site_url}/widget/chart/dashboard.utilities"></iframe>
                         </div>
                     </div>
                 </div>
             </div>
+            {/if}
 
-            <div class="col-lg-3">
-                <div class="card subscription-widget">
+            <div class="{if !isMobile}col-3{else}col-12{/if}">
+                {if $data.partner < 2}
+                <div class="card right-widget">
                     <div class="card-body">
-                        <div class="text-center">
-                            <h3 class="text-uppercase">
-                                <i class="la la-crown"></i> {lang_dashboard_default_packagetitle}
-                            </h3>
-                        </div>
+                        <h4 class="text-uppercase">
+                            <i class="la la-handshake la-lg"></i> {__("lang_and_dashboard_pages_default_line109")}
+                        </h4>
+
                         <ul class="list-unstyled">
                             <li class="media">
-                                <i class="la la-telegram mr-2"></i>
+                                <i class="la la-hand-holding-usd mr-2"></i>
                                 <div class="media-body">
-                                    <h5 class="m-0 text-uppercase">
-                                        {lang_dashboard_default_packagesend}
-                                        <span class="help" zender-toggle="zender.view/tooltips-1">
-                                            <i class="la la-question-circle"></i>
-                                        </span>
-                                    </h5>
+                                    <h6 class="m-0 text-uppercase">
+                                        {__("lang_and_dashboard_pages_default_line117")}
+                                    </h6>
                                 </div>
                                 <div class="text-right">
-                                    <span class="text-warning">{$data.subscription.used.messages.sent}</span>
-                                    <h5>{$data.subscription.package.send}</h5>
+                                    <span class="text-warning">
+                                        <span title="{$data.balance.earnings} {strtoupper(system_currency)}">{number_format($data.balance.earnings, 2)} {strtoupper(system_currency)}</span>
+                                    </span>
                                 </div>
                             </li>
+                        </ul>
+                    </div>
+
+                    <div class="card-footer text-center">
+                        <button class="btn btn-primary btn-lg" zender-toggle="zender.add.payout">
+                            <i class="la la-money-check-alt"></i> {__("lang_and_dashboard_pages_default_line131")}
+                        </button>
+                    </div>
+                </div>
+                {/if}
+
+                <div class="card right-widget">
+                    <div class="card-body">
+                        <h4 class="text-uppercase">
+                            <i class="la la-digital-tachograph la-lg"></i> {__("lang_and_dashboard_pages_default_line140")}
+                        </h4>
+
+                        <ul class="list-unstyled">
                             <li class="media">
-                                <i class="la la-sms mr-2"></i>
+                                <i class="la la-coins mr-2"></i>
                                 <div class="media-body">
-                                    <h5 class="m-0 text-uppercase">
-                                        {lang_dashboard_default_packagereceive}
-                                        <span class="help" zender-toggle="zender.view/tooltips-2">
-                                            <i class="la la-question-circle"></i>
-                                        </span>
-                                    </h5>
+                                    <h6 class="m-0 text-uppercase">
+                                        {__("lang_and_dashboard_pages_default_line148")}
+                                    </h6>
                                 </div>
                                 <div class="text-right">
-                                    <span class="text-warning">{$data.subscription.used.messages.received}</span>
-                                    <h5>{$data.subscription.package.receive}</h5>
+                                    <span class="text-warning">
+                                        <span title="{$data.balance.credits} {strtoupper(system_currency)}">{number_format($data.balance.credits, 2)} {strtoupper(system_currency)}</span>
+                                    </span>
                                 </div>
                             </li>
+                        </ul>
+                    </div>
+
+                    <div class="card-footer text-center">
+                        <button class="btn btn-primary btn-lg" zender-toggle="zender.add.credits">
+                            <i class="la la-coins"></i> {__("lang_and_dashboard_pages_default_line162")}
+                        </button>
+                    </div>
+                </div>
+
+                <div class="card right-widget">
+                    <div class="card-body">
+                        <h4 class="text-uppercase">
+                            <i class="la la-chart-bar la-lg"></i> {__("lang_and_dashboard_pages_default_line170")}
+                        </h4>
+
+                        <ul class="list-unstyled">
                             <li class="media">
-                                <i class="la la-android mr-2"></i>
+                                <i class="la la-arrow-circle-up text-success mr-2"></i>
                                 <div class="media-body">
                                     <h5 class="m-0 text-uppercase">
-                                        {lang_dashboard_default_packagedevice}
-                                        <span class="help" zender-toggle="zender.view/tooltips-3">
-                                            <i class="la la-question-circle"></i>
-                                        </span>
+                                        {__("lang_and_dash_pg_def_line178")}
                                     </h5>
                                 </div>
                                 <div class="text-right">
-                                    <span class="text-warning">{$data.subscription.used.devices}</span>
-                                    <h5>{$data.subscription.package.device}</h5>
+                                    <h5 class="text-uppercase text-success">{$data.ratio.success}%</h5>
                                 </div>
                             </li>
+
                             <li class="media">
-                                <i class="la la-cube mr-2"></i>
+                                <i class="la la-arrow-circle-down text-danger mr-2"></i>
                                 <div class="media-body">
                                     <h5 class="m-0 text-uppercase">
-                                        {lang_dashboard_default_package}
-                                        <span class="help" zender-toggle="zender.view/tooltips-4">
-                                            <i class="la la-question-circle"></i>
-                                        </span>
+                                        {__("lang_and_dash_pg_def_line190")}
                                     </h5>
                                 </div>
                                 <div class="text-right">
-                                    <span class="text-warning">{$data.subscription.package.expire_date}</span>
-                                    <h5>{$data.subscription.package.name}</h5>
+                                    <h5 class="text-uppercase text-danger">{$data.ratio.failed}%</h5>
                                 </div>
                             </li>
                         </ul>
                     </div>
                 </div>
 
-                {_block("e4da3b7fbbce2345d7772b0674a318d5")}
+                <div class="card right-widget">
+                    <div class="card-body">
+                        <h4 class="text-uppercase">
+                            <i class="la la-link la-lg"></i> {__("lang_and_dash_pg_def_line204")}
+                        </h4>
+
+                        {if empty($data.package)}
+                        <div class="alert alert-danger mt-3 mb-0">
+                            {__("lang_and_dash_pg_def_line209")}
+                        </div>
+                        {else}
+                        <ul class="list-unstyled">
+                            <li class="media">
+                                <i class="la la-mobile mr-2"></i>
+                                <div class="media-body">
+                                    <h5 class="m-0 text-uppercase">
+                                        {__("lang_and_dash_pg_def_line217")}
+                                    </h5>
+                                </div>
+                                <div class="text-right">
+                                    <span class="text-warning">
+                                        {$data.count.devices} / {if $data.package.device_limit > 0}{$data.package.device_limit}{else}<i class="la la-infinity infinity"></i>{/if}
+                                    </span>
+                                    <h5 class="text-uppercase">{__("lang_and_dash_pg_def_line224")}</h5>
+                                </div>
+                            </li>
+
+                            <li class="media">
+                                <i class="la la-whatsapp mr-2"></i>
+                                <div class="media-body">
+                                    <h5 class="m-0 text-uppercase">
+                                        {__("lang_and_dash_pg_def_line232")}
+                                    </h5>
+                                </div>
+                                <div class="text-right">
+                                    <span class="text-warning">
+                                        {$data.count.accounts} / {if $data.package.wa_account_limit > 0}{$data.package.wa_account_limit}{else}<i class="la la-infinity infinity"></i>{/if}
+                                    </span>
+                                    <h5 class="text-uppercase">{__("lang_and_dash_pg_def_line239")}</h5>
+                                </div>
+                            </li>
+                        </ul>
+                        {/if}
+                    </div>
+                </div>
+
+                {* <div class="card app-download-widget">
+                    <div class="card-body">
+                        <div class="app-download-body text-uppercase text-center">
+                            <h4>{__("lang_and_dash_pg_def_line250")}</h4>
+                            <div class="mt-4 text-center">
+                                <a href="#" class="btn btn-primary py-3"><img src="{_assets("images/android.svg")}"></a>
+                                <a href="#" class="btn btn-success py-3"><img src="{_assets("images/apple.svg")}"></a>
+                            </div>
+                        </div>
+                    </div>
+                </div> *}
             </div>
         </div>
     </div>
+
+    {include "../modules/footer.block.tpl"}
 </div>

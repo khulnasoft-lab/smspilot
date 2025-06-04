@@ -13,40 +13,48 @@
         <div class="modal-body">
             <div class="form-row">
                 <div class="form-group col-12">
-                    <label>{lang_form_name}</label>
-                    <input type="text" name="name" class="form-control" placeholder="eg. Test Action">
+                    <label>
+                        {__("lang_form_name")} <i class="la la-info-circle" title="{__("lang_and_dash_hook_line17")}"></i>
+                    </label>
+                    <input type="text" name="name" class="form-control" placeholder="{__("lang_and_dash_hook_line19")}">
                 </div>
 
-                <div class="form-group col-12">
-                    <label>{lang_form_devices}</label>
-                    <select name="devices[]" class="form-control" data-live-search="true" zender-select-devices multiple>
-                        <option value="0" data-tokens="auto automatic" selected>{lang_form_automatic}</option>
-                        {foreach $data.devices as $device}
-                        <option value="{$device@key}" data-tokens="{$device.token}">{$device.name}</option>
-                        {/foreach}
+                <div class="form-group col-md-6">
+                    <label>
+                        {__("lang_and_dash_hook_line24")} <i class="la la-info-circle" title="{__("lang_and_dash_hook_line24_1")}"></i>
+                    </label>
+                    <select name="source" class="form-control">
+                        <option value="1">{__("lang_and_dash_hook_line27")}</option>
+                        <option value="2">{__("lang_and_dash_hook_line28")}</option>
                     </select>
                 </div>
 
-                <div class="form-group col-12">
-                    <label>{lang_form_hook_event}</label>
+                <div class="form-group col-md-6">
+                    <label>
+                        {__("lang_form_hook_event")} <i class="la la-info-circle" title="{__("lang_and_dash_hook_line34")}"></i>
+                    </label>
                     <select name="event" class="form-control">
-                        <option value="1">On Send</option>
-                        <option value="2">On Receive</option>
+                        <option value="1">{__("lang_and_dash_hook_line37")}</option>
+                        <option value="2">{__("lang_and_dash_hook_line38")}</option>
                     </select>
                 </div>
 
                 <div class="form-group col-12">
-                    <label>{lang_form_hook_link}</label>
-                    <textarea name="link" rows="5" class="form-control">{literal}https://someremoteurl.com/test.php?phone={{recipient.number}}&message={{recipient.message}}&time={{date.time}}{/literal}</textarea>
+                    <label>
+                        {__("lang_form_hook_link")} <i class="la la-info-circle" title="{__("lang_and_dash_hook_line44")}"></i>
+                    </label>
+                    <textarea name="link" rows="5" class="form-control">{literal}http://someremoteurl.com/test.php?phone={{phone}}&message={{message}}&time={{date.now}}{/literal}</textarea>
                 </div>
 
                 <div class="form-group col-12">
-                    <label>{lang_form_shortcodes}</label>
+                    <label>
+                        {__("lang_form_shortcodes")} <i class="la la-info-circle" title="{__("lang_and_dash_hook_line51")}"></i>
+                    </label>
                     {literal}
                     <p>
-                        <strong>
-                            {{recipient.number}}, {{recipient.message}}, {{date.time}}
-                        </strong>
+                        <code>
+                            <strong>{{phone}}</strong>, <strong>{{message}}</strong>, <strong>{{date.now}}</strong>, <strong>{{date.time}}</strong>
+                        </code>
                     </p>
                     {/literal}
                 </div>
@@ -54,8 +62,8 @@
         </div>
 
         <div class="modal-footer">
-            <button type="submit" class="btn btn-lg btn-primary btn-block">
-                <i class="la la-check-circle la-lg"></i> {lang_btn_submit}
+            <button type="submit" class="btn btn-lg btn-primary">
+                <i class="la la-check-circle la-lg"></i> {__("lang_btn_submit")}
             </button>
         </div>
     </div>

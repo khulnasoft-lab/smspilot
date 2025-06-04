@@ -18,7 +18,7 @@ It is the ideal class to quickly integrate file upload in your site. If the file
 
 You can also use the class to work on local files, which is especially useful to use the image manipulation features. The class also supports Flash uploaders and XMLHttpRequest.
 
-The class works with PHP 5.3+ and PHP 7 (use version 1.x for PHP 4 support), and its error messages can be localized at will.
+The class works with PHP 5.3+, PHP 7 and PHP 8 (use version 1.x for PHP 4 support), and its error messages can be localized at will.
 
 
 ## Install via composer
@@ -56,7 +56,7 @@ Create a simple HTML file, with a form such as:
 ```
 Create a file called upload.php (into which you have first loaded the class):
 ```php
-$handle = new \verot\Upload\Upload($_FILES['image_field']);
+$handle = new \Verot\Upload\Upload($_FILES['image_field']);
 if ($handle->uploaded) {
   $handle->file_new_name_body   = 'image_resized';
   $handle->image_resize         = true;
@@ -242,15 +242,15 @@ $handle->file_max_size = '1024'; // 1KB
 ```php
 $handle->mime_check = true;
 ```
-* **no_script** sets if the class turns scripts into text files (default: true)
+* **no_script** sets if the class turns dangerous scripts into text files (default: true)
 ```php
 $handle->no_script = false;
 ```
-* **allowed** array of allowed mime-types (or one string). wildcard accepted, as in _image/*_ (default: check `init()`)
+* **allowed** array of allowed mime-types or file extensions (or one string). wildcard accepted, as in _image/*_ (default: check `init()`)
 ```php
 $handle->allowed = array('application/pdf','application/msword', 'image/*');
 ```
-* **forbidden** array of forbidden mime-types (or one string). wildcard accepted, as in _image/*_  (default: check `init()`)
+* **forbidden** array of forbidden mime-types or file extensions (or one string). wildcard accepted, as in _image/*_  (default: check `init()`)
 ```php
 $handle->forbidden = array('application/*');
 ```
@@ -679,5 +679,5 @@ Most of the image operations require GD. GD2 is greatly recommended
 
 Version 1.x supports PHP 4, 5 and 7, but is not namespaced. Use it if you need support for PHP <5.3
 
-Version 2.x supports PHP 5.3+ and PHP 7.
+Version 2.x supports PHP 5.3+, PHP 7 and PHP 8.
 

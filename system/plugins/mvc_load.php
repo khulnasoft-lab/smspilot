@@ -14,6 +14,8 @@
 
 class MVC_Load
 {
+    use DynamicProperties;
+    
     /**
      * Class constructor
      * @access public

@@ -10,11 +10,6 @@ use Mollie\Api\Types\SequenceType;
 class Payment extends BaseResource
 {
     /**
-     * @var string
-     */
-    public $resource;
-
-    /**
      * Id of the payment (on the Mollie platform).
      *
      * @var string
@@ -39,7 +34,7 @@ class Payment extends BaseResource
     /**
      * The amount that has been settled containing the value and currency
      *
-     * @var \stdClass
+     * @var \stdClass|null
      */
     public $settlementAmount;
 
@@ -62,6 +57,14 @@ class Payment extends BaseResource
      * @var \stdClass|null
      */
     public $amountRemaining;
+
+    /**
+     * The total amount that was charged back for this payment. Only available when the
+     * total charged back amount is not zero.
+     *
+     * @var \stdClass|null
+     */
+    public $amountChargedBack;
 
     /**
      * Description of the payment that is shown to the customer during the payment,
@@ -126,6 +129,25 @@ class Payment extends BaseResource
     public $failedAt;
 
     /**
+     * $dueDate is used only for banktransfer method
+     * The date the payment should expire. Please note: the minimum date is tomorrow and the maximum date is 100 days after tomorrow.
+     * UTC due date for the banktransfer payment in ISO-8601 format.
+     *
+     * @example "2021-01-19"
+     * @var string|null
+     */
+    public $dueDate;
+
+    /**
+     * Consumer’s email address, to automatically send the bank transfer details to.
+     * Please note: the payment instructions will be sent immediately when creating the payment.
+     *
+     * @example "user@mollie.com"
+     * @var string|null
+     */
+    public $billingEmail;
+
+    /**
      * The profile ID this payment belongs to.
      *
      * @example pfl_xH2kP6Nc6X
@@ -146,6 +168,13 @@ class Payment extends BaseResource
      * @var string
      */
     public $redirectUrl;
+
+    /**
+     * Cancel URL set on this payment
+     *
+     * @var string
+     */
+    public $cancelUrl;
 
     /**
      * Webhook URL set on this payment
@@ -205,7 +234,7 @@ class Payment extends BaseResource
      * Details of a successfully paid payment are set here. For example, the iDEAL
      * payment method will set $details->consumerName and $details->consumerAccount.
      *
-     * @var \stdClass
+     * @var \stdClass|null
      */
     public $details;
 
@@ -242,12 +271,52 @@ class Payment extends BaseResource
     public $amountCaptured;
 
     /**
+     * Indicates whether the capture will be scheduled automatically or not. Set
+     * to manual to capture the payment manually using the Create capture endpoint.
+     *
+     * Possible values: "automatic", "manual"
+     *
+     * @var string|null
+     */
+    public $captureMode;
+
+    /**
+     * Indicates the interval to wait before the payment is
+     * captured, for example `8 hours` or `2 days. The capture delay
+     * will be added to the date and time the payment became authorized.
+     *
+     * Possible values: ... hours ... days
+     * @example 8 hours
+     * @var string|null
+     */
+    public $captureDelay;
+
+    /**
+     * UTC datetime on which the merchant has to have captured the payment in
+     * ISO-8601 format. This parameter is omitted if the payment is not authorized (yet).
+     *
+     * @example "2013-12-25T10:30:54+00:00"
+     * @var string|null
+     */
+    public $captureBefore;
+
+    /**
      * The application fee, if the payment was created with one. Contains amount
      * (the value and currency) and description.
      *
      * @var \stdClass|null
      */
-    public $applicationFeeAmount;
+    public $applicationFee;
+
+    /**
+     * An optional routing configuration which enables you to route a successful payment,
+     * or part of the payment, to one or more connected accounts. Additionally, you can
+     * schedule (parts of) the payment to become available on the connected account on a
+     * future date.
+     *
+     * @var array|null
+     */
+    public $routing;
 
     /**
      * The date and time the payment became authorized, in ISO 8601 format. This
@@ -342,7 +411,7 @@ class Payment extends BaseResource
      */
     public function isPaid()
     {
-        return !empty($this->paidAt);
+        return ! empty($this->paidAt);
     }
 
     /**
@@ -352,7 +421,7 @@ class Payment extends BaseResource
      */
     public function hasRefunds()
     {
-        return !empty($this->_links->refunds);
+        return ! empty($this->_links->refunds);
     }
 
     /**
@@ -362,7 +431,7 @@ class Payment extends BaseResource
      */
     public function hasChargebacks()
     {
-        return !empty($this->_links->chargebacks);
+        return ! empty($this->_links->chargebacks);
     }
 
     /**
@@ -414,6 +483,20 @@ class Payment extends BaseResource
     }
 
     /**
+     * Get the mobile checkout URL where the customer can complete the payment.
+     *
+     * @return string|null
+     */
+    public function getMobileAppCheckoutUrl()
+    {
+        if (empty($this->_links->mobileAppCheckout)) {
+            return null;
+        }
+
+        return $this->_links->mobileAppCheckout->href;
+    }
+
+    /**
      * @return bool
      */
     public function canBeRefunded()
@@ -460,6 +543,31 @@ class Payment extends BaseResource
     }
 
     /**
+     * Get the total amount that was charged back for this payment. Only available when the
+     * total charged back amount is not zero.
+     *
+     * @return float
+     */
+    public function getAmountChargedBack()
+    {
+        if ($this->amountChargedBack) {
+            return (float)$this->amountChargedBack->value;
+        }
+
+        return 0.0;
+    }
+
+    /**
+     * Does the payment have split payments
+     *
+     * @return bool
+     */
+    public function hasSplitPayments()
+    {
+        return ! empty($this->routing);
+    }
+
+    /**
      * Retrieves all refunds associated with this payment
      *
      * @return RefundCollection
@@ -467,7 +575,7 @@ class Payment extends BaseResource
      */
     public function refunds()
     {
-        if (!isset($this->_links->refunds->href)) {
+        if (! isset($this->_links->refunds->href)) {
             return new RefundCollection($this->client, 0, null);
         }
 
@@ -489,10 +597,22 @@ class Payment extends BaseResource
      * @param array $parameters
      *
      * @return Refund
+     * @throws ApiException
      */
     public function getRefund($refundId, array $parameters = [])
     {
         return $this->client->paymentRefunds->getFor($this, $refundId, $this->withPresetOptions($parameters));
+    }
+
+    /**
+     * @param array $parameters
+     *
+     * @return Refund
+     * @throws ApiException
+     */
+    public function listRefunds(array $parameters = [])
+    {
+        return $this->client->paymentRefunds->listFor($this, $this->withPresetOptions($parameters));
     }
 
     /**
@@ -503,7 +623,7 @@ class Payment extends BaseResource
      */
     public function captures()
     {
-        if (!isset($this->_links->captures->href)) {
+        if (! isset($this->_links->captures->href)) {
             return new CaptureCollection($this->client, 0, null);
         }
 
@@ -525,6 +645,7 @@ class Payment extends BaseResource
      * @param array $parameters
      *
      * @return Capture
+     * @throws ApiException
      */
     public function getCapture($captureId, array $parameters = [])
     {
@@ -543,7 +664,7 @@ class Payment extends BaseResource
      */
     public function chargebacks()
     {
-        if (!isset($this->_links->chargebacks->href)) {
+        if (! isset($this->_links->chargebacks->href)) {
             return new ChargebackCollection($this->client, 0, null);
         }
 
@@ -567,6 +688,7 @@ class Payment extends BaseResource
      * @param array $parameters
      *
      * @return Chargeback
+     * @throws ApiException
      */
     public function getChargeback($chargebackId, array $parameters = [])
     {
@@ -582,50 +704,32 @@ class Payment extends BaseResource
      *
      * @param array $data
      *
-     * @return BaseResource
+     * @return \Mollie\Api\Resources\Refund
      * @throws ApiException
      */
     public function refund($data)
     {
-        $resource = "payments/" . urlencode($this->id) . "/refunds";
-
-        $data = $this->withPresetOptions($data);
-        $body = null;
-        if (count($data) > 0) {
-            $body = json_encode($data);
-        }
-
-        $result = $this->client->performHttpCall(
-            MollieApiClient::HTTP_POST,
-            $resource,
-            $body
-        );
-
-        return ResourceFactory::createFromApiResult(
-            $result,
-            new Refund($this->client)
-        );
+        return $this->client->paymentRefunds->createFor($this, $data);
     }
 
+    /**
+     * @return \Mollie\Api\Resources\Payment
+     * @throws \Mollie\Api\Exceptions\ApiException
+     */
     public function update()
     {
-        if (!isset($this->_links->self->href)) {
-            return $this;
-        }
-
-        $body = json_encode([
+        $body = [
             "description" => $this->description,
+            "cancelUrl" => $this->cancelUrl,
             "redirectUrl" => $this->redirectUrl,
             "webhookUrl" => $this->webhookUrl,
             "metadata" => $this->metadata,
             "restrictPaymentMethodsToCountry" => $this->restrictPaymentMethodsToCountry,
-        ]);
+            "locale" => $this->locale,
+            "dueDate" => $this->dueDate,
+        ];
 
-        $result = $this->client->performHttpCallToFullUrl(
-            MollieApiClient::HTTP_PATCH,
-            $this->_links->self->href,
-            $body
-        );
+        $result = $this->client->payments->update($this->id, $body);
 
         return ResourceFactory::createFromApiResult($result, new Payment($this->client));
     }
@@ -638,7 +742,7 @@ class Payment extends BaseResource
     private function getPresetOptions()
     {
         $options = [];
-        if($this->client->usesOAuth()) {
+        if ($this->client->usesOAuth()) {
             $options["testmode"] = $this->mode === "test" ? true : false;
         }
 
@@ -655,11 +759,11 @@ class Payment extends BaseResource
     {
         return array_merge($this->getPresetOptions(), $options);
     }
-    
+
     /**
      * The total amount that is already captured for this payment. Only available
      * when this payment supports captures.
-     * 
+     *
      * @return float
      */
     public function getAmountCaptured()
@@ -688,13 +792,13 @@ class Payment extends BaseResource
     /**
      * The total amount that is already captured for this payment. Only available
      * when this payment supports captures.
-     * 
+     *
      * @return float
      */
     public function getApplicationFeeAmount()
     {
-        if ($this->applicationFeeAmount) {
-            return (float)$this->applicationFeeAmount->value;
+        if ($this->applicationFee) {
+            return (float)$this->applicationFee->amount->value;
         }
 
         return 0.0;

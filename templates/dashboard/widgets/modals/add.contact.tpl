@@ -13,18 +13,24 @@
         <div class="modal-body">
             <div class="form-row">
                 <div class="form-group col-12">
-                    <label>{lang_form_name}</label>
-                    <input type="text" name="name" class="form-control" placeholder="eg. Michael">
+                    <label>
+                        {__("lang_form_name")} <i class="la la-info-circle" title="{__("lang_and_dash_con_line17")}"></i>
+                    </label>
+                    <input type="text" name="name" class="form-control" placeholder="{__("lang_and_dash_auto_line19")}">
                 </div>
 
                 <div class="form-group col-12">
-                    <label>{lang_form_number}</label>
-                    <input type="text" name="phone" class="form-control" placeholder="eg. +639123456789">
+                    <label>
+                        {__("lang_form_number")} <i class="la la-info-circle" title="{__("lang_and_dash_con_line24")}"></i>
+                    </label>
+                    <input type="text" name="phone" class="form-control" placeholder="eg. {$data.number}">
                 </div>
                 
                 <div class="form-group col-12">
-                    <label>{lang_form_group}</label>
-                    <select name="group" class="form-control" data-live-search="true">
+                    <label>
+                        {__("lang_form_group")} <i class="la la-info-circle" title="{__("lang_and_dash_con_line31")}"></i>
+                    </label>
+                    <select name="groups[]" class="form-control" data-live-search="true" multiple>
                         {foreach $data.groups as $group}
                         <option value="{$group@key}" data-tokens="{$group.token}">{$group.name}</option>
                         {/foreach}
@@ -34,8 +40,8 @@
         </div>
 
         <div class="modal-footer">
-            <button type="submit" class="btn btn-lg btn-primary btn-block">
-                <i class="la la-check-circle la-lg"></i> {lang_btn_submit}
+            <button type="submit" class="btn btn-lg btn-primary">
+                <i class="la la-check-circle la-lg"></i> {__("lang_btn_submit")}
             </button>
         </div>
     </div>

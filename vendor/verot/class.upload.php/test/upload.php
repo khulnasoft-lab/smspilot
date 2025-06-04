@@ -2,6 +2,7 @@
 namespace Verot\Upload;
 
 error_reporting(E_ALL);
+@ini_set("display_errors", 1);
 
 // we first include the upload class, as we will need it here to deal with the uploaded file
 include('../src/class.upload.php');
@@ -249,7 +250,7 @@ if ($action == 'simple') {
 
         // we create an instance of the class, feeding in the name of the file
         // sent via a XMLHttpRequest request, prefixed with 'php:'
-        $handle = new Upload('php:'.$_SERVER['HTTP_X_FILE_NAME']);
+        $handle = new Upload('php:'.rawurldecode($_SERVER['HTTP_X_FILE_NAME']));
 
     } else {
         // we create an instance of the class, giving as argument the PHP object
@@ -361,7 +362,7 @@ if ($action == 'simple') {
 
 
     //error_reporting(E_ALL ^ (E_NOTICE | E_USER_NOTICE | E_WARNING | E_USER_WARNING));
-    ini_set("max_execution_time",0);
+    @ini_set("max_execution_time",0);
 
     // we don't upload, we just send a local filename (image)
     $handle = new Upload((isset($_POST['my_field']) ? $_POST['my_field'] : (isset($_GET['file']) ? $_GET['file'] : '')));

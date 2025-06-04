@@ -23,24 +23,38 @@ class MVC_Library_Sanitize
 		return $sanitized;
 	}
 
-	public function length($requests, $minimum = 3)
+	public function length($requests, $limit = 3, $type = 1)
 	{
-		if(is_array($requests)):
-			foreach($requests as $request):
-				if(strlen($request) < ($minimum + 1))
+		if($type < 2):
+			if(is_array($requests)):
+				foreach($requests as $request):
+					if(strlen($request) < ($limit + 1))
+						return false;
+				endforeach;
+			else:
+				if(strlen($requests) < ($limit + 1))
 					return false;
-			endforeach;
-		else:
-			if(strlen($requests) < ($minimum + 1))
-				return false;
-		endif;
+			endif;
 
-		return true;
+			return true;
+		else:
+			if(is_array($requests)):
+				foreach($requests as $request):
+					if(strlen($request) > ($limit + 1))
+						return true;
+				endforeach;
+			else:
+				if(strlen($requests) > ($limit + 1))
+					return true;
+			endif;
+
+			return false;
+		endif;
 	}
 
-	public function string($string)
+	public function string($string, $strip = false)
 	{
-	    return filter_var($string, FILTER_SANITIZE_STRING);
+	    return $strip ? htmlspecialchars(strip_tags($string)) : htmlspecialchars($string);
 	}
 
 	public function email($string)
@@ -61,6 +75,11 @@ class MVC_Library_Sanitize
 	public function htmlDecode($string)
 	{
 	    return htmlspecialchars_decode($string);
+	}
+
+	public function isNumeric($val)
+	{
+	    return is_numeric($val);
 	}
 
 	public function isInt($int)
@@ -93,10 +112,5 @@ class MVC_Library_Sanitize
 	        return true;
 	    else
 	        return false;
-	}
-
-	public function isValidToken($request, $token = "_token")
-	{
-		return \Volnix\CSRF\CSRF::validate($request, $token);
 	}
 }

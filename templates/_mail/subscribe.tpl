@@ -349,31 +349,16 @@
                   <table role="presentation" border="0" cellpadding="0" cellspacing="0">
                     <tr>
                       <td>
-                        <p>Hi there,</p>
-                        <p>Thank you for subscribing to one of our premium packages, here's a little run down of your purchase:</p>
+                        <p>{__("lang_mail_subscribetpl_line1")}</p>
+                        <p>{__("lang_mail_subscribetpl_line2")}</p>
                         <p>
-                          <strong>{$data.package.name} Package</strong>
+                          <strong>{___(__("lang_mail_subscribetpl_line3"), ["{$data.package.name}"])}</strong>
                         </p>
                         <p>
-                          Send Limit: <strong>{$data.package.send_limit}</strong> per day
+                          {___(__("lang_mail_subscribetpl_line4"), ["{$data.subscription.expire_date}"])}
                         </p>
-                        <p>
-                          Receive Limit: <strong>{$data.package.receive_limit}</strong> per day
-                        </p>
-                        <p>
-                          Allowed Devices: <strong>{$data.package.device_limit}</strong>
-                        </p>
-                        <p>
-                          Allowed API Keys: <strong>{$data.package.key_limit}</strong>
-                        </p>
-                        <p>
-                          Allowed Webhooks: <strong>{$data.package.webhook_limit}</strong>
-                        </p>
-                        <p>
-                          This subscription will expire after <strong>{$data.subscription.expire_date}</strong>
-                        </p>
-                        <p>All these benefits will take effect immediately. For questions and issues, please don't hesitate to contact us!</p>
-                        <p>Thank you!</p>
+                        <p>{__("lang_mail_subscribetpl_line5")}</p>
+                        <p>{__("lang_mail_subscribetpl_line6")}</p>
                       </td>
                     </tr>
                   </table>
@@ -390,7 +375,7 @@
                 <tr>
                   <td class="content-block">
                     <span class="apple-link">
-                      Powered by <a href="{site_url}">{system_site_name}</a>
+                      {___(__("lang_mail_tpl_poweredby"), ["<a href=\"{site_url}\">{system_site_name}</a>"])}
                     </span>
                   </td>
                 </tr>

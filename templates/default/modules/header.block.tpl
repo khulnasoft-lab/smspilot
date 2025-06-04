@@ -1,118 +1,61 @@
-<header class="header" zender-navbar>
-    <div class="container">
-        <nav class="navbar">
-            <div class="container navbar-wrap">
-                <div class="navbar-left">
-                    <a href="{site_url}" zender-nav>{logo("landing", "
-                        <div class=\"top-logo\">
-                            <i class=\"la la-telegram\"></i>
-                            <span class=\"d-none d-sm-inline\">
-                                {system_site_name}
-                            </span>
-                        </div>
-                    ")}</a>
-                </div>
-                
-                <div class="navbar-right">
-                    <div class="mobile-menu">
-                        <ul>
-                            <li>
-                                <a href="#features" zender-scroll>
-                                    <i class="la la-tools la-lg"></i> {lang_landing_nav_features}
-                                </a>
-                            </li>
-                            <li>
-                                <a href="#pricing" zender-scroll>
-                                    <i class="la la-coins la-lg"></i> {lang_landing_nav_pricing}
-                                </a>
-                            </li>
-                            <li>
-                                <a href="#clients" zender-scroll>
-                                    <i class="la la-user-friends la-lg"></i> {lang_landing_nav_clients}
-                                </a>
-                            </li>
-                            <li>
-                                <a href="#" zender-toggle="zender.login">
-                                    <i class="la la-user-circle la-lg"></i> {lang_landing_nav_login}
-                                </a>
-                            </li>
-                        </ul>
-                    </div>
-
-                    <ul class="top-menu">
-                        <li>
-                            <a href="#features" zender-scroll>
-                                <i class="la la-tools la-lg"></i> {lang_landing_nav_features}
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#pricing" zender-scroll>
-                                <i class="la la-coins la-lg"></i> {lang_landing_nav_pricing}
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#clients" zender-scroll>
-                                <i class="la la-user-friends la-lg"></i> {lang_landing_nav_clients}
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#" zender-toggle="zender.api">
-                                <i class="la la-terminal la-lg"></i> {lang_landing_nav_api}
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#" class="btn btn-primary btn-lg text-uppercase" zender-toggle="zender.login">
-                                <i class="la la-user-circle la-lg"></i> {lang_landing_nav_login}
-                            </a>
-                        </li>
-                    </ul>
-
-                    <div class="flex">
-                        <div class="menu-toggle-icon">
-                            <div class="menu-toggle">
-                                <div class="menu">
-                                    <input type="checkbox" />
-                                    <div></div>
-                                    <div></div>
-                                    <div></div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </nav>
-
-        <div class="container">
-            <div class="row header-wrap align-items-center justify-content-center">
-                <div class="col-12">
-                    <div class="header-wrap">
-                        {if $page eq "pages"}
-                        <h2 class="header-title">
-                            {$data.page.name}
-                        </h2>
-                        {else}
-                        <h2 class="header-title">
-                            {lang_landing_lead_head}
-                        </h2>
-
-                        <p class="header-description">
-                            {lang_landing_lead_desc}
-                        </p>
-
-                        {if system_registrations < 2}
-                        <div class="flex start center header-btns">
-                            <button class="btn btn-primary btn-lg text-uppercase mr-3 mb-1 mr-0-sm" zender-toggle="zender.register">
-                                <i class="la la-edit la-lg"></i> {lang_landing_lead_btn}
-                            </button>
-                        </div>
-                        {/if}
-                        {/if}
-                    </div>
-
-                    <img class="header-screen" src="{assets("images/landing.png", "default")}">
-                </div>
-            </div>
+<header id="home" class="wrapper bg-soft-primary">
+  <nav class="navbar navbar-expand-lg classic transparent position-absolute navbar-dark">
+    <div class="container flex-lg-row flex-nowrap align-items-center">
+      <div class="navbar-brand w-100">
+        <a href="{site_url}" zender-nav>
+          <img class="logo-light" src="{get_image("logo_light")}" />
+          <img class="logo-dark" src="{get_image("logo_dark")}" />
+        </a>
+      </div>
+      
+      <div class="navbar-collapse offcanvas-nav">
+        <div class="offcanvas-header d-lg-none d-xl-none">
+          <a href="{site_url}">
+            <img src="{get_image("logo_light")}" alt="{system_site_name}" />
+          </a>
+          <button type="button" class="btn-close btn-close-white offcanvas-close offcanvas-nav-close" aria-label="Close"></button>
         </div>
+
+        <ul class="navbar-nav">
+          <li class="nav-item">
+            <a class="nav-link scroll" href="#home">{__("lang_and_head_blck_21")}</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link scroll" href="#features">{__("lang_and_head_blck_24")}</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link scroll" href="#pricing">{__("lang_and_head_blck_27")}</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link scroll" href="#clients">{__("lang_and_head_blck_30")}</a>
+          </li> 
+        </ul>
+      </div>
+
+      <div class="navbar-other ms-lg-4">
+        <ul class="navbar-nav flex-row align-items-center ms-auto">
+            {if logged_id} 
+            <li class="nav-item d-md-block">
+                <a href="{site_url("dashboard")}" class="btn btn-sm btn-primary text-capitalize">{__("lang_and_head_blck_39")}</a>
+            </li> 
+            <li class="nav-item d-none d-md-block">
+                <button class="btn btn-sm btn-danger text-capitalize" zender-action="logout">{__("lang_and_head_blck_42")}</button>
+            </li>
+            {else}
+            <li class="nav-item d-md-block">
+                <a href="{site_url("dashboard/authenticate/login")}" class="btn btn-sm btn-white text-capitalize">{__("lang_landing_nav_login")}</a>
+            </li> 
+            {/if} 
+
+            <li class="nav-item d-lg-none">
+                <div class="navbar-hamburger">
+                    <button class="hamburger animate plain" data-toggle="offcanvas-nav">
+                        <span></span>
+                    </button>
+                </div>
+            </li>
+        </ul>
+      </div>
     </div>
+  </nav>
 </header>

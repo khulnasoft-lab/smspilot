@@ -349,16 +349,14 @@
                   <table role="presentation" border="0" cellpadding="0" cellspacing="0">
                     <tr>
                       <td>
-                        <p>Hi there,</p>
-                        <p>
-                          We are unable to process your payment transaction, please try again using a different provider or payment method.
-                        </p>
+                        <p>{__("lang_mail_failedtpl_line1")}</p>
+                        <p>{__("lang_mail_failedtpl_line2")}</p>
                         
                         <p>
-                          Payment ID: <strong>{$data.order}</strong>
+                          {__("lang_mail_failedtpl_line3")} <strong>{$data.order}</strong>
                         </p>
 
-                        <p>Sorry for the inconvenience :/</p>
+                        <p>{__("lang_mail_failedtpl_line4")}</p>
                       </td>
                     </tr>
                   </table>
@@ -375,7 +373,7 @@
                 <tr>
                   <td class="content-block">
                     <span class="apple-link">
-                      Powered by <a href="{site_url}">{system_site_name}</a>
+                      {___(__("lang_mail_tpl_poweredby"), ["<a href=\"{site_url}\">{system_site_name}</a>"])}
                     </span>
                   </td>
                 </tr>

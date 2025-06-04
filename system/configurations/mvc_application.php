@@ -5,8 +5,6 @@
  * @author Titan Systems <mail@titansystems.ph>
  */
 
-ini_set("display_errors", 1);
-
 get_configs();
 
 define("configuration", [
@@ -19,29 +17,43 @@ define("configuration", [
 
 define("autoload", [
 	"libraries" => [
+		["Datatables", "datatable"],
+		["Timezones", "timezones"],
 		["PhoneNumber", "phone"],
 		["Sanitize", "sanitize"],
+		["Spintax", "spintax"],
+		["Process", "process"],
+		["Whatsapp", "wa"],
 		["Session", "session"],
-		["PHPMailer", "mail"],
 		["Smarty", "smarty"],
+		["Paypal", "paypal"],
 		["Header", "header"],
 		["Guzzle", "guzzle"],
 		["Upload", "upload"],
 		["Sheets", "sheet"],
 		["Cache", "cache"],
+		["Zip", "zip"],
+		["Zip", "zippy"],
 		["File", "file"],
 		["SCSS", "scss"],
 		["Hash", "hash"],
 		["Slug", "slug"],
+		["Echo", "echo"],
+		["Mail", "mail"],
+		["Fcm", "fcm"],
 		["URI", "url"],
 		["Lex", "lex"]
 	],
 	"models" => [
 		["Api_Model", "api"],
 		["Cron_Model", "cron"],
+		["Admin_Model", "admin"],
 		["Table_Model", "table"],
+		["Social_Model", "social"],
 		["Widget_Model", "widget"],
 		["System_Model", "system"],
-		["Gateway_Model", "gateway"]
+		["Device_Model", "device"],
+		["Gateway_Model", "gateway"],
+		["Whatsapp_Model", "whatsapp"]
 	]
 ]);

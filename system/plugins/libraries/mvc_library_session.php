@@ -14,7 +14,7 @@ class MVC_Library_Session
 
     public function get($key)
     {
-        if($this->has("logged"))
+        if($this->has($key))
             return $_SESSION[$key];
         else
             return false;

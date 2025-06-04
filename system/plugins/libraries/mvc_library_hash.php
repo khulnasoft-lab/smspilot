@@ -10,6 +10,6 @@ class MVC_Library_Hash {
 	public function decode($hash, $salt = false, $padding = 30)
 	{
 		$hashids = new Hashids\Hashids($salt, $padding);
-		return (isset($hashids->decode($hash)[0]) ? $hashids->decode($hash)[0] : false);
+		return !empty($hashids->decode($hash)) ? (count($hashids->decode($hash)) > 1 ? $hashids->decode($hash) : $hashids->decode($hash)[0] ) : false;
 	}
 }

@@ -4,12 +4,21 @@ namespace Mollie\Api\Types;
 
 class MandateMethod
 {
-    const DIRECTDEBIT = "directdebit";
-    const CREDITCARD = "creditcard";
+    public const DIRECTDEBIT = "directdebit";
+    public const CREDITCARD = "creditcard";
+    public const PAYPAL = "paypal";
 
+    /**
+     * @param string $firstPaymentMethod
+     * @return string
+     */
     public static function getForFirstPaymentMethod($firstPaymentMethod)
     {
-        if(in_array($firstPaymentMethod, [
+        if ($firstPaymentMethod === PaymentMethod::PAYPAL) {
+            return static::PAYPAL;
+        }
+
+        if (in_array($firstPaymentMethod, [
             PaymentMethod::APPLEPAY,
             PaymentMethod::CREDITCARD,
         ])) {

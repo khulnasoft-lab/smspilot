@@ -13,9 +13,11 @@
         <div class="modal-body">
             <div class="form-row">
                 <div class="form-group col-12">
-                    <label>{lang_form_excelfile}</label>
+                    <label>
+                        {__("lang_form_excelfile")} <i class="la la-info-circle" title="{__("lang_and_import_line17")}"></i>
+                    </label>
                     <small class="text-danger">
-                        {lang_form_followformat} <a href="#" zender-toggle="zender.view/excel-2">{lang_form_clickhere}</a>
+                        {__("lang_and_import_line20")} <a href="{site_url("uploads/system/contacts_sample.xlsx")}" target="_blank">{__("lang_and_import_line20_1")}</a>
                     </small>
                     <input type="file" name="excel" class="form-control pb-5">
                 </div>
@@ -23,8 +25,8 @@
         </div>
 
         <div class="modal-footer">
-            <button type="submit" class="btn btn-lg btn-primary btn-block">
-                <i class="la la-check-circle la-lg"></i> {lang_btn_submit}
+            <button type="submit" class="btn btn-lg btn-primary">
+                <i class="la la-check-circle la-lg"></i> {__("lang_btn_submit")}
             </button>
         </div>
     </div>

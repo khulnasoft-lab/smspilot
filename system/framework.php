@@ -31,6 +31,7 @@ endif;
  * Runtime
  */
 
+require "mvc_dynamicproperties.php";
 require "mvc_errorhandler.php";
 require "mvc_functions.php";
 
@@ -131,6 +132,8 @@ class MVC
         else:
             $controller_name = !empty($this->url_segments[1]) ? (isset(parse_url($this->url_segments[1])["path"]) ? parse_url($this->url_segments[1])["path"] : false) : $this->config["default_controller"];
 
+            $controller_name = in_array($controller_name, ["index"]) ? "default" : $controller_name;
+
             $controller_file = "{$controller_name}.php";
 
             if (!stream_resolve_include_path($controller_file)):
@@ -152,10 +155,11 @@ class MVC
      */
     private function actions()
     {
-        if (!empty($this->config["root_action"]))
+        if (!empty($this->config["root_action"])):
             $this->action = $this->config["root_action"];
-        else
-            $this->action = !empty($this->url_segments[2]) ? (isset(parse_url($this->url_segments[2])["path"]) ? parse_url($this->url_segments[2])["path"] : false) : (!empty($this->config["default_action"]) ? $this->config["default_action"] : "index");
+        else:
+            $this->action = !empty($this->url_segments[2]) ? (isset(parse_url($this->url_segments[2])["path"]) ? parse_url($this->url_segments[2])["path"] : "index") : (!empty($this->config["default_action"]) ? $this->config["default_action"] : "index");
+        endif;
     }
   
     /**

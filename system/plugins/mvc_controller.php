@@ -15,7 +15,8 @@
 
 class MVC_Controller
 {
-
+    use DynamicProperties;
+    
     /**
      * Class constructor
      * @access public

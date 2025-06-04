@@ -23,6 +23,8 @@ class MVC_ExceptionHandler extends ErrorException
     
     public static function handleException(Throwable $e)
     {
+      $site_url = site_url;
+
       $template = <<<HTML
 <!DOCTYPE html>
 <html lang="en">
@@ -46,10 +48,14 @@ class MVC_ExceptionHandler extends ErrorException
           File: {$e->getFile()}
         </code>
       </p>
+
+      <p><a href="{$site_url}">Reload Page</a></p>
     </div>  
 </body>
 </html>
 HTML;
+
+      @file_put_contents("system/storage/temporary/error.log", "Message: {$e->getMessage()} at line {$e->getLine()}\nFile: {$e->getFile()} (" . date("m/d/Y g:i A") . ")\n\n", FILE_APPEND);
 
       die($template);
     }

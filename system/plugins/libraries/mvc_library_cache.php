@@ -51,7 +51,7 @@ class MVC_Library_Cache {
       $file = file_get_contents($this->getCacheDir());
       return json_decode($file, true);
     } else {
-      return false;
+      return [];
     }
   }
 
@@ -94,6 +94,29 @@ class MVC_Library_Cache {
       }
     }
     return true;
+  }
+
+  /**
+   * Erase all expired entries
+   * 
+   * @return integer
+   */
+  private function deleteExpired() {
+    $cacheData = $this->_loadCache();
+    if (true === is_array($cacheData)) {
+      $counter = 0;
+      foreach ($cacheData as $key => $entry) {
+        if (true === $this->_checkExpired($entry['time'], $entry['expire'])) {
+          unset($cacheData[$key]);
+          $counter++;
+        }
+      }
+      if ($counter > 0) {
+        $cacheData = json_encode($cacheData);
+        file_put_contents($this->getCacheDir(), $cacheData);
+      }
+      return $counter;
+    }
   }
 
   /**
@@ -164,8 +187,13 @@ class MVC_Library_Cache {
    * @param string $name
    * @return object
    */
-  public function container($name) {
+  public function container($name, $deleteExpired = false) {
     $this->_cachename = $name;
+
+    if($deleteExpired):
+      $this->deleteExpired();
+    endif;
+
     return $this;
   }
 
@@ -219,22 +247,20 @@ class MVC_Library_Cache {
       $dataArray = [$key => $storeData];
     }
     $cacheData = json_encode($dataArray);
-    return (file_put_contents($this->getCacheDir(), $cacheData) ? true : false);
+    return file_put_contents($this->getCacheDir(), $cacheData) ? true : false;
   }
 
   /**
    * Store raw data in the cache
    *
-   * @param string $key
-   * @param mixed $data
-   * @param integer [optional] $expiration
-   * @return object
+   * @param string $raw
+   * @return bool
    */
   public function setRaw($raw) {
     $dataArray = $this->_loadCache();
     $dataArray["raw"] = $raw;
     $cacheData = json_encode($dataArray);
-    return (file_put_contents($this->getCacheDir(), $cacheData) ? true : false);
+    return file_put_contents($this->getCacheDir(), $cacheData) ? true : false;
   }
 
 
@@ -256,7 +282,7 @@ class MVC_Library_Cache {
       ];
     endforeach;
     $cacheData = json_encode($dataArray);
-    return (file_put_contents($this->getCacheDir(), $cacheData) ? true : false);
+    return file_put_contents($this->getCacheDir(), $cacheData) ? true : false;
   }
 
   /**
@@ -321,33 +347,10 @@ class MVC_Library_Cache {
         $cacheData = json_encode($cacheData);
         file_put_contents($this->getCacheDir(), $cacheData);
       } else {
-        throw new Exception("Error: erase() - Key '{$key}' not found.");
+        return false;
       }
     }
     return $this;
-  }
-
-  /**
-   * Erase all expired entries
-   * 
-   * @return integer
-   */
-  public function deleteExpired() {
-    $cacheData = $this->_loadCache();
-    if (true === is_array($cacheData)) {
-      $counter = 0;
-      foreach ($cacheData as $key => $entry) {
-        if (true === $this->_checkExpired($entry['time'], $entry['expire'])) {
-          unset($cacheData[$key]);
-          $counter++;
-        }
-      }
-      if ($counter > 0) {
-        $cacheData = json_encode($cacheData);
-        file_put_contents($this->getCacheDir(), $cacheData);
-      }
-      return $counter;
-    }
   }
 
   /**

@@ -15,16 +15,39 @@ class Widget_Model extends MVC_Model
         return $this->db->num_rows();
     }
 
+    public function checkPackage($id)
+    {
+        $this->db->query("SELECT id FROM packages WHERE id = ?", [
+            $id
+        ]);
+
+        return $this->db->num_rows();
+    }
+
     /**
      * @type Single Row
      */
 
     public function getContent($id, $table, $column)
     {
-        return $this->db->query_one("SELECT {$column} FROM {$table} WHERE id = ? AND uid = ?", [
-            $id,
-            logged_id
-        ])[$column];
+        if($table == "`keys`"):
+            $query = <<<SQL
+SELECT REPLACE({$column}, ',', ', ') AS permissions FROM {$table} WHERE id = ? AND uid = ?
+SQL;
+        else:
+            $query = <<<SQL
+SELECT {$column} FROM {$table} WHERE id = ? AND uid = ?
+SQL;
+        endif;
+
+        try {
+            return $this->db->query_one($query, [
+                $id,
+                logged_id
+            ])[$column];
+        } catch(Exception $e){
+            return false;
+        }
     }
 
     public function getModal($hash)
@@ -41,44 +64,77 @@ class Widget_Model extends MVC_Model
         ]);
     }
 
-    public function getContact($id)
+    public function getScheduled($uid, $id, $wa = false)
     {
-        return $this->db->query_one("SELECT id, name, phone, gid FROM contacts WHERE id = ?", [
+        if($wa):
+            return $this->db->query_one("SELECT id, uid, wid, `groups`, name, numbers, message, `repeat`, last_send, send_date FROM wa_scheduled WHERE uid = ? AND id = ?", [
+                $uid,
+                $id
+            ]);
+        else:
+            return $this->db->query_one("SELECT id, uid, did, sim, mode, gateway, `groups`, name, numbers, message, `repeat`, last_send, send_date FROM scheduled WHERE uid = ? AND id = ?", [
+                $uid,
+                $id
+            ]);
+        endif;
+    }
+
+    public function getContact($uid, $id)
+    {
+        return $this->db->query_one("SELECT id, `groups`, name, phone FROM contacts WHERE uid = ? AND id = ?", [
+            $uid,
             $id
         ]);
     }
 
-    public function getGroup($id)
+    public function getGroup($uid, $id)
     {
-        return $this->db->query_one("SELECT id, name FROM groups WHERE id = ?", [
+        return $this->db->query_one("SELECT id, name FROM `groups` WHERE uid = ? AND id = ?", [
+            $uid,
             $id
         ]);
     }
 
-    public function getKey($id)
+    public function getDevice($id)
     {
-        return $this->db->query_one("SELECT id, uid, `key`, name, devices, permissions FROM `keys` WHERE id = ?", [
+        return $this->db->query_one("SELECT id, name, version, random_send, random_min, random_max, limit_status, limit_interval, limit_number, packages, receive_sms, global_device, global_priority, global_slots, country, rate FROM devices WHERE id = ?", [
+            $id
+        ]);
+    }
+
+    public function getWhatsapp($id)
+    {
+        return $this->db->query_one("SELECT id, uid, wid, `unique`, receive_chats, random_send, random_min, random_max FROM wa_accounts WHERE id = ?", [
+            $id
+        ]);
+    }
+
+    public function getKey($uid, $id)
+    {
+        return $this->db->query_one("SELECT id, uid, secret, name, permissions FROM `keys` WHERE uid = ? AND id = ?", [
+            $uid,
             $id
         ]);
     }
 
     public function getWebhook($id)
     {
-        return $this->db->query_one("SELECT id, uid, secret, name, url, devices FROM webhooks WHERE id = ?", [
+        return $this->db->query_one("SELECT id, uid, events, secret, name, url FROM webhooks WHERE id = ?", [
             $id
         ]);
     }
 
-    public function getAction($id)
+    public function getAction($uid, $id)
     {
-        return $this->db->query_one("SELECT id, uid, type, event, name, devices, keywords, link, message, create_date FROM actions WHERE id = ?", [
+        return $this->db->query_one("SELECT id, uid, type, source, event, priority, `match`, sim, device, account, name, keywords, link, message, create_date FROM actions WHERE uid = ? AND id = ?", [
+            $uid,
             $id
         ]);
     }
 
     public function getUser($id)
     {
-        return $this->db->query_one("SELECT id, role, email, name, language FROM users WHERE id = ?", [
+        return $this->db->query_one("SELECT id, role, email, credits, name, language, timezone, formatting, country, alertsound, partner FROM users WHERE id = ?", [
             $id
         ]);
     }
@@ -92,7 +148,7 @@ class Widget_Model extends MVC_Model
 
     public function getPackage($id)
     {
-        return $this->db->query_one("SELECT id, name, price, send_limit, receive_limit, contact_limit, device_limit, key_limit, webhook_limit FROM packages WHERE id = ?", [
+        return $this->db->query_one("SELECT * FROM packages WHERE id = ?", [
             $id
         ]);
     }
@@ -113,7 +169,32 @@ class Widget_Model extends MVC_Model
 
     public function getLanguage($id)
     {
-        return $this->db->query_one("SELECT id, iso, name, translations FROM languages WHERE id = ?", [
+        return $this->db->query_one("SELECT id, rtl, iso, name FROM languages WHERE id = ?", [
+            $id
+        ]);
+    }
+
+    public function getGateway($id)
+    {
+        return $this->db->query_one("SELECT id, name, callback, callback_id, pricing, create_date FROM gateways WHERE id = ?", [
+            $id
+        ]);
+    }
+
+    public function getShortener($id)
+    {
+        return $this->db->query_one("SELECT id, name, create_date FROM shorteners WHERE id = ?", [
+            $id
+        ]);
+    }
+
+    public function getPlugin($id)
+    {
+        $query = <<<SQL
+            SELECT id, data FROM plugins WHERE id = ?
+SQL;
+
+        return $this->db->query_one($query, [
             $id
         ]);
     }
@@ -150,7 +231,7 @@ SQL;
 	public function getGroups($uid)
 	{
 		$query = <<<SQL
-SELECT id, uid, name FROM groups WHERE uid = ?
+SELECT id, uid, name FROM `groups` WHERE uid = ?
 SQL;
 
 		$this->db->query($query, [
@@ -161,8 +242,7 @@ SQL;
             while ($row = $this->db->next())
                 $rows[$row["id"]] = [
                 	"name" => $row["name"],
-                	"token" => strtolower($row["name"]),
-                	"default" => (strtolower($row["name"]) == "default" ? true : false)
+                	"token" => strtolower($row["name"])
                 ];
 
             return $rows;
@@ -171,10 +251,47 @@ SQL;
         endif;
 	}
 
-    public function getDevices($uid)
+    public function getDevices($uid, $ussd = false)
+    {
+        if($ussd):
+            $query = <<<SQL
+SELECT id, uid, did, name, online_id, online_status FROM devices WHERE uid = ? AND ROUND(version) >= 8
+SQL;
+        else:
+            $query = <<<SQL
+SELECT id, uid, did, name, online_id, online_status FROM devices WHERE uid = ?
+SQL;
+        endif;
+
+        $this->db->query($query, [
+            $uid
+        ]);
+
+        if ($this->db->num_rows() > 0):
+            while ($row = $this->db->next())
+                $rows[$row["did"]] = [
+                    "id" => $row["id"],
+                    "uid" => $row["uid"],
+                    "global" => false,
+                    "name" => $row["name"],
+                    "online_id" => $row["online_id"],
+                    "status" => $row["online_status"],
+                    "token" => strtolower($row["name"])
+                ];
+
+            return $rows;
+        else:
+            return [];
+        endif;
+    }
+
+    public function getGlobalDevices($uid)
     {
         $query = <<<SQL
-SELECT id, uid, did, name FROM devices WHERE uid = ?
+SELECT d.id AS id, d.uid AS uid, d.did AS did, d.name AS name, d.country AS country, d.rate AS rate, d.online_id AS online_id, d.online_status AS online_status, u.email AS owner
+FROM devices d
+LEFT JOIN users u ON d.uid = u.id 
+WHERE d.uid != ? AND d.global_device < 2
 SQL;
 
         $this->db->query($query, [
@@ -184,9 +301,43 @@ SQL;
         if ($this->db->num_rows() > 0):
             while ($row = $this->db->next())
                 $rows[$row["did"]] = [
+                    "id" => $row["id"],
+                    "uid" => $row["uid"],
+                    "global" => true,
+                    "country" => $row["country"],
+                    "rate" => $row["rate"],
                     "name" => $row["name"],
+                    "owner" => $row["owner"],
+                    "online_id" => $row["online_id"],
+                    "status" => $row["online_status"],
                     "token" => strtolower($row["name"])
                 ];
+
+            return $rows;
+        else:
+            return [];
+        endif;
+    }
+
+    public function getWaAccounts($uid)
+    {
+        $query = <<<SQL
+SELECT id, uid, wid, `unique` FROM wa_accounts WHERE uid = ?
+SQL;
+
+        $this->db->query($query, [
+            $uid
+        ]);
+
+        if ($this->db->num_rows() > 0):
+            while ($row = $this->db->next()):
+                $name = explode(":", $row["wid"]);
+                $rows[$row["id"]] = [
+                    "name" => "+{$name[0]}",
+                    "token" => "+{$name[0]}",
+                    "wid" => $row["wid"]
+                ];
+            endwhile;
 
             return $rows;
         else:
@@ -215,6 +366,44 @@ SQL;
         endif;
     }
 
+    public function getGateways()
+    {
+        $query = <<<SQL
+SELECT id, name, pricing
+FROM gateways
+SQL;
+
+        $this->db->query($query);
+
+        if ($this->db->num_rows() > 0):
+            while ($row = $this->db->next())
+                $rows[$row["id"]] = $row;
+
+            return $rows;
+        else:
+            return [];
+        endif;
+    }
+
+    public function getShorteners()
+    {
+        $query = <<<SQL
+SELECT id, name, create_date
+FROM shorteners
+SQL;
+
+        $this->db->query($query);
+
+        if ($this->db->num_rows() > 0):
+            while ($row = $this->db->next())
+                $rows[$row["id"]] = $row;
+
+            return $rows;
+        else:
+            return [];
+        endif;
+    }
+
     public function getRoles()
     {
         $query = <<<SQL
@@ -233,30 +422,23 @@ SQL;
         endif;
     }
 
-    public function getSystemSettings()
+    public function getPackages($hiddenFilter = false, $freemodel = false)
     {
-        $query = <<<SQL
-SELECT id, name, value FROM settings
-SQL;
+        $freemodelSql = !$freemodel ? ($hiddenFilter ? "WHERE hidden > 1 AND id > 1" : "WHERE id > 1") : ($hiddenFilter ? "WHERE hidden > 1" : false);
 
-        $this->db->query($query);
-
-        if ($this->db->num_rows() > 0):
-            while ($row = $this->db->next())
-                $rows[$row["name"]] = $row["value"];
-
-            return $rows;
-        else:
-            return [];
-        endif;
-    }
-
-    public function getPackages()
-    {
-        $query = <<<SQL
-SELECT id, FORMAT(send_limit, 0) AS send, FORMAT(receive_limit, 0) AS receive, FORMAT(contact_limit, 0) AS contacts, FORMAT(device_limit, 0) AS devices, FORMAT(key_limit, 0) AS `keys`, FORMAT(webhook_limit, 0) AS webhooks, name, price
+        if($hiddenFilter):
+            $query = <<<SQL
+SELECT *
 FROM packages
+{$freemodelSql}
 SQL;
+        else:
+            $query = <<<SQL
+SELECT *
+FROM packages
+{$freemodelSql}
+SQL;
+        endif;
 
         $this->db->query($query);
 
@@ -282,6 +464,7 @@ SQL;
             while ($row = $this->db->next())
                 $rows[$row["id"]] = [
                     "id" => $row["id"],
+                    "hash" => md5($row["id"]),
                     "role" => $row["role"],
                     "name" => $row["name"],
                     "email" => $row["email"],

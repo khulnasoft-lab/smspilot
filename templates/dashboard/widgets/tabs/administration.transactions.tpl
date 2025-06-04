@@ -1,6 +1,6 @@
 <div class="card">
     <div class="card-header">
-        <h4 class="card-title"><i class="la la-coins la-lg"></i> {lang_dashboard_admin_tabtransactionstitle}</h4>
+        <h4 class="card-title"><i class="la la-coins la-lg"></i> {__("lang_dashboard_admin_tabtransactionstitle")}</h4>
     </div>
 
     <div class="card-body">

@@ -84,35 +84,31 @@ class MVC_PDO
     public function __construct($config)
     {
         if (!class_exists("PDO", false))
-            throw new Exception("PHP PDO package is required.");
+            throw new Exception("PHP PDO package is required!");
      
         if (empty($config))
-            throw new Exception("Fatabase definitions required.");
+            throw new Exception("Database definitions required!");
 
-        if (empty($config["charset"]))
-            $config["charset"] = "utf8mb4";
+        $config["port"] = isset($config["port"]) ? $config["port"] : 3306;
 
-        $config['port'] = isset($config['port']) ? $config['port'] : 3306;
-
-        if (!empty($config['dsn'])):
-            $dsn = $config['dsn'];
-        elseif ($config['type'] == 'sqlsrv'):
-            $dsn = "{$config['type']}:Server={$config['host']};Database={$config['name']}";
+        if (!empty($config["dsn"])):
+            $dsn = $config["dsn"];
+        elseif ($config["type"] == "sqlsrv"):
+            $dsn = "{$config["type"]}:Server={$config["host"]};Database={$config["name"]}";
         else:
-            $dsn = "{$config["type"]}:host={$config['host']};port={$config['port']};dbname={$config['name']};charset={$config['charset']}";
+            $dsn = "{$config["type"]}:host={$config["host"]};port={$config["port"]};dbname={$config["name"]};charset=utf8mb4";
         endif;
      
-        /* attempt to instantiate PDO object and database connection */
         if(isset(env["installed"])):
             try {
                 $this->pdo = new PDO(
                     $dsn,
-                    $config['user'],
-                    $config['pass'],
-                    [PDO::ATTR_PERSISTENT => !empty($config["persistent"]) ? true : false]
+                    $config["user"],
+                    $config["pass"]
                 );
 
-                $this->pdo->exec("SET CHARACTER SET {$config["charset"]}");
+                $this->pdo->exec("SET NAMES utf8mb4");
+                $this->pdo->exec("SET CHARACTER SET utf8mb4");
             } catch (PDOException $e) {
                 throw new Exception(sprintf("Can't connect to database \"{$config["type"]}\". Error: %s", $e->getMessage()));
             }
@@ -467,9 +463,17 @@ class MVC_PDO
     
     public function _query($query, $params = [], $return_type = MVC_SQL_NONE, $fetch_mode = false)
     {
-  
         if (!$fetch_mode)
             $fetch_mode = PDO::FETCH_ASSOC;
+
+        $timezone = (new DateTime("now", new DateTimeZone(defined("logged_timezone") && !empty(logged_timezone) ? logged_timezone : "UTC")))->format("P");
+
+        try {
+            $this->pdo->exec("SET time_zone = \"{$timezone}\"");
+        } catch (PDOException $e) {
+            throw new Exception(sprintf("PDO Error: %s Query: %s", $e->getMessage(), $query));
+            return false;
+        }
   
         try {
             $this->result = $this->pdo->prepare($query);
@@ -528,7 +532,7 @@ class MVC_PDO
 
         foreach ($columns as $cname => $cvalue) {
             if (!empty($cname)):
-                $fields[] = "{$cname}=?";
+                $fields[] = "`{$cname}`=?";
                 $params[] = $cvalue;
             endif;
         }

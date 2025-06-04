@@ -1,3 +1,5 @@
+<!DOCTYPE html>
+
 <div id="chart"></div>
 
 <script src="{_assets("js/libs/fetch.min.js")}"></script>

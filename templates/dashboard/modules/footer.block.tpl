@@ -2,18 +2,18 @@
     <div class="container">
         <div class="row align-items-center">
             <div class="col-md-6 col-12">
-                <div class="copyright text-center text-md-left">
+                <div class="copyright text-center {if language_rtl}text-md-right{else}text-md-left{/if}">
                     <p>
-                        <a href="#" zender-toggle="eccbc87e4b5ce2fe28308fd9f2a7baf3">{lang_dashboard_footer_about}</a> &middot;
-                        <a href="#" zender-toggle="c4ca4238a0b923820dcc509a6f75849b">{lang_dashboard_footer_terms}</a> &middot;
-                        <a href="#" zender-toggle="c81e728d9d4c2f636f067f89cc14862c">{lang_dashboard_footer_privacy}</a>
+                        <a href="#" zender-page="3/about">{__("lang_dashboard_footer_about")}</a> &middot;
+                        <a href="#" zender-page="4/terms-of-service">{__("lang_dashboard_footer_terms")}</a> &middot;
+                        <a href="#" zender-page="5/privacy-policy">{__("lang_dashboard_footer_privacy")}</a>
                     </p>
                 </div>
             </div>
 
             <div class="col-md-6 col-12">
-                <div class="copyright text-center text-md-right">
-                    <p>{lang_dashboard_footer_copyright} &copy; {date("Y")}</p>
+                <div class="copyright text-center {if language_rtl}text-md-left{else}text-md-right{/if}">
+                    <p>{__("lang_dashboard_footer_copyright")} &copy; {date("Y")}</p>
                 </div>
             </div>
         </div>

@@ -1,9 +1,0 @@
-.DS_Store
-Thumbs.db
-.idea
-
-composer.phar
-composer.lock
-
-/build
-/vendor

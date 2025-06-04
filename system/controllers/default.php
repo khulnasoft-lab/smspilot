@@ -1,18 +1,25 @@
 <?php
-/**
- * @controller Default
- */
 
 class Default_Controller extends MVC_Controller
 {
     public function index()
     {
+        set_template("default");
+        
         $page = ($this->sanitize->string($this->url->segment(2)) ?: "default");
 
-        if($this->session->has("logged") && $page != "pages")
-            $this->header->redirect(site_url("dashboard"));
-        else
-            set_template("default");
+        $this->cache->container("system.languages");
+
+        if($this->cache->empty()):
+            $this->cache->setArray($this->system->getLanguages());
+        endif;
+
+        foreach($this->cache->getAll() as $language):
+            if($page == $language["iso"]):
+                $this->session->set("language", $language["id"]);
+                $this->header->redirect(site_url);
+            endif;
+        endforeach;
 
         if(!$this->smarty->templateExists(template . "/pages/{$page}.tpl"))
             $this->header->redirect(site_url);
@@ -20,37 +27,36 @@ class Default_Controller extends MVC_Controller
         $this->cache->container("system.settings");
 
         if($this->cache->empty()):
-            $this->cache->setArray($this->system->getSystemSettings());
+            $this->cache->setArray($this->system->getSettings());
         endif;
 
         set_system($this->cache->getAll());
 
-        set_logged($this->session->get("logged"));
-
-        $this->cache->container("system.language." . logged_language);
+        $this->cache->container("system.plugins");
 
         if($this->cache->empty()):
-            $this->cache->setRaw($this->system->getTranslations(logged_language));
+            $this->cache->setArray($this->system->getPlugins());
         endif;
 
-        set_language($this->cache->getRaw());
+        set_plugins($this->cache->getAll());
+
+        set_logged($this->session->get("logged"));
+
+        set_language(logged_language, $this->system->getLanguageRtl(logged_language));
 
         $this->cache->container("system.blocks");
 
         if($this->cache->empty()):
+            $blocks = [];
+            
             foreach($this->system->getBlocks() as $key => $value):
                 $blocks[$key] = $this->smarty->fetch("string: {$this->sanitize->htmlDecode($value)}");
             endforeach;
+
             $this->cache->setArray($blocks);
         endif;
 
         set_blocks($this->cache->getAll());
-
-        $this->cache->container("system.packages");
-
-        if($this->cache->empty()):
-            $this->cache->setArray($this->system->getDefaultPackages());
-        endif;
 
         switch($page):
             case "pages":
@@ -63,6 +69,9 @@ class Default_Controller extends MVC_Controller
                 if(empty($slug))
                     $this->header->redirect(site_url);
 
+                if($this->system->checkPage($id) < 1)
+                    $this->header->redirect(site_url);
+
                 $this->cache->container("system.pages");
 
                 if(!$this->cache->has($id)):
@@ -72,7 +81,7 @@ class Default_Controller extends MVC_Controller
                 $content = $this->cache->get($id);
 
                 if($this->session->has("logged"))
-                    $this->header->redirect(site_url . "/dashboard/pages/{$content["id"]}/{$content["slug"]}");
+                    $this->header->redirect(site_url("dashboard/pages/{$content["id"]}/{$content["slug"]}"));
 
                 if($content["logged"] < 2)
                     $this->header->redirect(site_url);
@@ -84,16 +93,19 @@ class Default_Controller extends MVC_Controller
                     "title" => $content["name"],
                     "data" => [
                         "page" => $content,
-                        "content" => $this->sanitize->htmlDecode($content["content"])
+                        "content" => $this->smarty->fetch("string: {$this->sanitize->htmlDecode($content["content"])}")
                     ]
                 ];
 
                 break;
             default:
+                if(system_homepage > 1)
+                    $this->header->redirect(site_url("dashboard"));
+
                 $vars = [
-                    "title" => lang_landing_title_default,
+                    "title" => __("lang_landing_title_default"),
                     "data" => [
-                        "packages" => $this->cache->getAll()
+                        "packages" => $this->widget->getPackages(true, system_freemodel < 2 ? true : false)
                     ]
                 ];
 

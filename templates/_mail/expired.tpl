@@ -349,11 +349,11 @@
                   <table role="presentation" border="0" cellpadding="0" cellspacing="0">
                     <tr>
                       <td>
-                        <p>Hi there,</p>
-                        <p>You received this message because your active premium package subscription has already expired!</p>
-                        <p>Your subscription has been changed to default free package, you can subscribe again to any premium package. Just visit our site and order again.</p>
-                        <p>For questions and issues, please don't hesitate to contact us!</p>
-                        <p>Thank you!</p>
+                        <p>{__("lang_mail_expiredtpl_line1")}</p>
+                        <p>{__("lang_mail_expiredtpl_line2")}</p>
+                        <p>{__("lang_mail_expiredtpl_line3")}</p>
+                        <p>{__("lang_mail_expiredtpl_line4")}</p>
+                        <p>{__("lang_mail_expiredtpl_line5")}</p>
                       </td>
                     </tr>
                   </table>
@@ -370,7 +370,7 @@
                 <tr>
                   <td class="content-block">
                     <span class="apple-link">
-                      Powered by <a href="{site_url}">{system_site_name}</a>
+                      {___(__("lang_mail_tpl_poweredby"), ["<a href=\"{site_url}\">{system_site_name}</a>"])}
                     </span>
                   </td>
                 </tr>

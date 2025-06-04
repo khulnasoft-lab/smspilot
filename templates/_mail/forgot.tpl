@@ -349,12 +349,12 @@
                   <table role="presentation" border="0" cellpadding="0" cellspacing="0">
                     <tr>
                       <td>
-                        <p>Hi there,</p>
-                        <p>We've received an account retrieval request for your account, please use this temporary password to login:</p>
+                        <p>{__("lang_mail_forgottpl_line1")},</p>
+                        <p>{__("lang_mail_forgottpl_line2")}</p>
                         <p style="font-weight: bold">{$data.password}</p>
-                        <p>Don't forget to change your password after logging in!</p>
-                        <p>The password will expire after 10 minutes, be quick. If you didn't requested this, please ignore this email.</p>
-                        <p>Thank you! Hope it works.</p>
+                        <p>{__("lang_mail_forgottpl_line3")}</p>
+                        <p>{__("lang_mail_forgottpl_line4")}</p>
+                        <p>{__("lang_mail_forgottpl_line5")}</p>
                       </td>
                     </tr>
                   </table>
@@ -371,7 +371,7 @@
                 <tr>
                   <td class="content-block">
                     <span class="apple-link">
-                      Powered by <a href="{site_url}">{system_site_name}</a>
+                      {___(__("lang_mail_tpl_poweredby"), ["<a href=\"{site_url}\">{system_site_name}</a>"])}
                     </span>
                   </td>
                 </tr>

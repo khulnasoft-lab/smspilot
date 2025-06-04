@@ -12,31 +12,37 @@
         
         <div class="modal-body">
             <div class="form-row">
-                <div class="form-group col-12">
-                    <label>{lang_form_name}</label>
-                    <input type="text" name="name" class="form-control" placeholder="eg. {lang_form_webhookname_placeholder}" value="{$data.webhook.name}">
+                <div class="form-group col-md-6">
+                    <label>
+                        {__("lang_form_name")} <i class="la la-info-circle" title="{__("lang_and_edweb_line17")}"></i>
+                    </label>
+                    <input type="text" name="name" class="form-control" placeholder="eg. {__("lang_form_webhookname_placeholder")}" value="{$data.webhook.name}">
                 </div>
 
-                <div class="form-group col-12">
-                    <label>{lang_form_webhookurl}</label>
-                    <input type="text" name="url" class="form-control" placeholder="eg. https://yourdomain.com/reply.php" value="{$data.webhook.url}">
-                </div>
-
-                <div class="form-group col-12">
-                    <label>{lang_form_devices}</label>
-                    <select name="devices[]" class="form-control" data-live-search="true" zender-select-devices multiple>
-                        <option value="0" data-tokens="auto automatic" {if $data.automatic}selected{/if}>{lang_form_automatic}</option>
-                        {foreach $data.devices as $device}
-                        <option value="{$device@key}" data-tokens="{$device.token}" {if $device.selected}selected{/if}>{$device.name}</option>
-                        {/foreach}
+                <div class="form-group col-md-6">
+                    <label>
+                        {__("lang_and_edweb_line24")} <i class="la la-info-circle" title="{__("lang_and_edweb_line24_1")}"></i>
+                    </label>
+                    <select name="events[]" class="form-control" multiple>
+                        <option value="sms" {if in_array("sms", explode(",", $data.webhook.events))}selected{/if}>SMS</option>
+                        <option value="whatsapp" {if in_array("whatsapp", explode(",", $data.webhook.events))}selected{/if}>WhatsApp</option>
+                        <option value="ussd" {if in_array("ussd", explode(",", $data.webhook.events))}selected{/if}>USSD</option>
+                        <option value="notifications" {if in_array("notifications", explode(",", $data.webhook.events))}selected{/if}>{__("lang_and_edweb_line30")}</option>
                     </select>
+                </div>
+
+                <div class="form-group col-12">
+                    <label>
+                        {__("lang_form_webhookurl")} <i class="la la-info-circle" title="{__("lang_and_edweb_line36")}"></i>
+                    </label>
+                    <input type="text" name="url" class="form-control" placeholder="{__("lang_and_edweb_line38")}" value="{$data.webhook.url}">
                 </div>
             </div>
         </div>
 
         <div class="modal-footer">
-            <button type="submit" class="btn btn-lg btn-primary btn-block">
-                <i class="la la-check-circle la-lg"></i> {lang_btn_submit}
+            <button type="submit" class="btn btn-lg btn-primary">
+                <i class="la la-check-circle la-lg"></i> {__("lang_btn_submit")}
             </button>
         </div>
     </div>
