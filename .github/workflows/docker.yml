@@ -18,7 +18,7 @@ jobs:
 
       - name: Build Docker image
         run: |
-          docker build -t zender-sms-gateway:ci .
+          docker build -t smspilot:ci .
 
       - name: List files in build context
         run: |
@@ -33,5 +33,5 @@ jobs:
 
       # - name: Push Docker image
       #   run: |
-      #     docker tag zender-sms-gateway:ci yourdockerhub/zender-sms-gateway:latest
+      #     docker tag smspilot:ci yourdockerhub/zender-sms-gateway:latest
       #     docker push yourdockerhub/zender-sms-gateway:latest
