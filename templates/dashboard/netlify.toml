@@ -1,0 +1,6 @@
+[build]
+  publish = "."
+  command = ""
+
+[settings]
+  # Custom Netlify settings can be added here

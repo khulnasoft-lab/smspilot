@@ -1,0 +1,4 @@
+# Only deploy static dashboard assets
+!.gitignore
+!index.html
+assets/
