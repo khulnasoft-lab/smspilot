@@ -34,8 +34,12 @@
         }
     }
     if ($needs_install) {
-        header('Location: install');
-        exit;
+        // Prevent redirect loop if already on install page
+        if (!isset($_SERVER['REQUEST_URI']) || stripos($_SERVER['REQUEST_URI'], '/install') === false) {
+            header('Location: install');
+            exit;
+        }
+        // Otherwise, let the installer run and show errors
     }
 
     /**

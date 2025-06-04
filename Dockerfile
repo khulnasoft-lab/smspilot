@@ -16,8 +16,9 @@ WORKDIR /var/www/html
 # Copy project files
 COPY . /var/www/html
 
-# Set recommended permissions
-RUN chown -R www-data:www-data /var/www/html/Install/uploads /var/www/html/Install/system/storage
+# Ensure uploads and storage directories exist, then set recommended permissions
+RUN mkdir -p /var/www/html/uploads /var/www/html/system/storage \
+    && chown -R www-data:www-data /var/www/html/uploads /var/www/html/system/storage
 
 # Expose port 80
 EXPOSE 80

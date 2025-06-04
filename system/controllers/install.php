@@ -79,7 +79,9 @@ dbpass<=>{$request["dbpass"]}
 systoken<=>{$systoken}
 installed<=>true";
 
-		$this->file->put("system/configurations/cc_env.inc", $env);
+		if(!$this->file->put("system/configurations/cc_env.inc", $env)) {
+			response(500, "Failed to write system/configurations/cc_env.inc! Please check file and directory permissions (chmod 775) and try again.");
+		}
 
 		try {
 			$query = "INSERT INTO users (email, password, name, role, suspended, language) VALUES (\"{$filtered["email"]}\", \"{$filtered["password"]}\", \"{$filtered["name"]}\", 1, 0, {$filtered["language"]});
