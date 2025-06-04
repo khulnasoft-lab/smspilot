@@ -1,0 +1,36 @@
+# Zender SaaS Platform .gitignore
+# Exclude files and directories that should not be versioned
+
+# Dependency directories
+
+# Uploaded files and user data
+
+# System cache, logs, temp files
+*.log
+*.tmp
+*.cache
+
+# Environment and config files
+.env
+.env.*
+
+# OS generated files
+.DS_Store
+Thumbs.db
+
+# Composer lock file (optional, include if you want reproducible builds)
+# composer.lock
+
+# Node modules (if any front-end assets are built)
+/node_modules/
+
+# IDE/project files
+.idea/
+.vscode/
+
+# Other
+/build/
+/dist/
+
+# Ignore files created by the Makefile (if any)
+*.bak

@@ -1,0 +1,16 @@
+RewriteEngine On
+
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+
+<IfModule mod_php7.c>
+	RewriteRule ^(.*)$ index.php/$1 [QSA,L]
+</IfModule>
+
+<IfModule !mod_php7.c>
+	RewriteRule ^(.*)$ index.php?/$1 [QSA,L]
+</IfModule>
+
+RewriteRule ^(system|vendor|templates|uploads)/$ - [R=404]
+RewriteRule ^(system|vendor|templates|uploads)/.*/$ - [R=404]
+RewriteRule ^(system|vendor|templates)/.*\.(php|dat|tpl|scss|gitkeep|inc)$ - [R=404]

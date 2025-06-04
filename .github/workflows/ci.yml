@@ -1,0 +1,75 @@
+name: CI
+
+on:
+  push:
+    branches: [ main, master, develop ]
+  pull_request:
+    branches: [ main, master, develop ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    services:
+      mysql:
+        image: mysql:5.7
+        env:
+          MYSQL_DATABASE: zender_db
+          MYSQL_USER: zender_user
+          MYSQL_PASSWORD: your_password
+          MYSQL_ROOT_PASSWORD: root_password
+        ports:
+          - 3306:3306
+        options: >-
+          --health-cmd="mysqladmin ping --silent" --health-interval=10s --health-timeout=5s --health-retries=3
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: '7.4'
+          extensions: mbstring, intl, zip, curl, xmlreader, bcmath, gd, pdo, pdo_mysql, mysqli
+
+      - name: Install Composer dependencies
+        run: |
+          if [ -f composer.json ]; then composer install --no-interaction --prefer-dist; fi
+
+      - name: Copy .env.example to .env (if exists)
+        run: |
+          if [ -f .env.example ]; then cp .env.example .env; fi
+
+      - name: Wait for MySQL
+        run: |
+          for i in {1..30}; do
+            mysql -h 127.0.0.1 -u zender_user -pyour_password -e "SHOW DATABASES;" && break
+            sleep 2
+          done
+
+      - name: Run basic PHP lint
+        run: |
+          find . -type f -name "*.php" -exec php -l {} \;
+
+      - name: Run PHPUnit tests
+        run: |
+          if [ -f vendor/bin/phpunit ]; then vendor/bin/phpunit --testdox; fi
+
+      - name: Docker Build & Push
+        uses: docker/build-push-action@v5
+        with:
+          context: .
+          push: ${{ secrets.DOCKERHUB_USERNAME && secrets.DOCKERHUB_TOKEN }}
+          tags: ${{ secrets.DOCKERHUB_USERNAME }}/zender:latest
+        env:
+          DOCKERHUB_USERNAME: ${{ secrets.DOCKERHUB_USERNAME }}
+          DOCKERHUB_TOKEN: ${{ secrets.DOCKERHUB_TOKEN }}
+        if: github.ref == 'refs/heads/main' || github.ref == 'refs/heads/master'
+
+      - name: Deploy to Netlify
+        uses: nwtgck/actions-netlify@v2.0
+        with:
+          publish-dir: ./public
+          production-deploy: true
+          NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
+          NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}
+        if: github.ref == 'refs/heads/main' || github.ref == 'refs/heads/master'
