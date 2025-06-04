@@ -65,7 +65,7 @@
   },
   "require-dev": {
     "phing/phing": "^2.7",
-    "pear/versioncontrol_git": "^0.5",
+    "pear/versioncontrol_git": "^0.7",
     "pear/pear-core-minimal": "^1.9",
     "pear/pear_exception": "^1.0",
     "phpunit/phpunit": "^4.8.36|^5.0",
