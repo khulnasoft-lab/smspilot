@@ -7,5 +7,4 @@ $baseDir = dirname($vendorDir);
 
 return array(
     'Lex' => array($vendorDir . '/pyrocms/lex/lib'),
-    'Detection' => array($vendorDir . '/mobiledetect/mobiledetectlib/namespaced'),
 );

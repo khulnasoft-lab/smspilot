@@ -2,6 +2,7 @@
 /**
  * @desc Helper functions
  */
+use Stringy\Stringy;
 
 function get_configs($env = false, $ver = false)
 {   
@@ -25,12 +26,12 @@ function get_configs($env = false, $ver = false)
     endforeach;
 
     $vals["siteurl"] = (isset($_SERVER["SERVER_NAME"]) ? $_SERVER["SERVER_NAME"] : php_uname("n"));
-    $vals["port"] = (in_array($_SERVER["SERVER_PORT"], [80, 443]) ? false : ":{$_SERVER["SERVER_PORT"]}");
+    $vals["port"] = (isset($_SERVER["SERVER_PORT"]) && in_array($_SERVER["SERVER_PORT"], [80, 443]) ? false : (isset($_SERVER["SERVER_PORT"]) ? ":{$_SERVER["SERVER_PORT"]}" : ""));
     $vals["subdir"] = (empty(explode("/", dirname($_SERVER["SCRIPT_NAME"]))[1]) ? false : dirname($_SERVER["SCRIPT_NAME"]));
 
     define("env", $vals);
 
-    if(!isset(env["installed"]) && !Stringy\create($_SERVER["REQUEST_URI"])->contains("install"))
+    if(!isset(env["installed"]) && isset($_SERVER["REQUEST_URI"]) && !Stringy::create($_SERVER["REQUEST_URI"])->contains("install"))
         header("location: ./install");
 
     return get_version($ver);
@@ -83,7 +84,7 @@ function set_language($id, $rtl = 2)
     $langStrings = [];
 
     foreach($lines as $line):
-        if(Stringy\create($line)->contains("===")):
+        if(Stringy::create($line)->contains("===")):
             $columns = explode("===", trim($line));
             $langStrings["lang_" . trim($columns[0])] = trim($columns[1]);            
         endif;
@@ -257,12 +258,12 @@ function _block($id)
 
 function _assets($path, $force = false)
 {
-    return (Stringy\create($path)->contains(".js") || Stringy\create($path)->contains(".css") ? site_url . "/templates/_assets/{$path}?v=" . ($force ? md5(filemtime("templates/_assets/{$path}")) : md5(version)) : site_url . "/templates/_assets/{$path}");
+    return (Stringy::create($path)->contains(".js") || Stringy::create($path)->contains(".css") ? site_url . "/templates/_assets/{$path}?v=" . ($force ? md5(filemtime("templates/_assets/{$path}")) : md5(version)) : site_url . "/templates/_assets/{$path}");
 }
 
 function assets($path, $template = template)
 {
-    return (Stringy\create($path)->contains(".js") || Stringy\create($path)->contains(".css") ? site_url . "/templates/{$template}/assets/{$path}?v=" . md5(filemtime("templates/{$template}/assets/{$path}")) : site_url . "/templates/{$template}/assets/{$path}");
+    return (Stringy::create($path)->contains(".js") || Stringy::create($path)->contains(".css") ? site_url . "/templates/{$template}/assets/{$path}?v=" . md5(filemtime("templates/{$template}/assets/{$path}")) : site_url . "/templates/{$template}/assets/{$path}");
 }
 
 function response($status = 200, $msg = false, $data = false)
@@ -342,7 +343,7 @@ function footermark($state, $message, $mark)
 
 function find($find, $string)
 {
-    return Stringy\create($string)->contains($find);
+    return Stringy::create($string)->contains($find);
 }
 
 function rmrf($dir) 
@@ -408,7 +409,7 @@ function maskEmail($email)
 
 function formatMexicoNumWa($number)
 {
-    return (string) Stringy\create($number)->insert(1, 3);
+    return (string) Stringy::create($number)->insert(1, 3);
 }
 
 function encodeBraces($string)

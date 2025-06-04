@@ -1,4 +1,5 @@
 <?php
+use Smarty\Smarty;
 
 class MVC_Library_Smarty extends Smarty
 {

@@ -81,7 +81,8 @@ class MVC
     
     public function run()
     {
-        $this->path_info = env["subdir"] ? (String) Stringy\create($_SERVER["REQUEST_URI"])->removeLeft(env["subdir"]) : $_SERVER["REQUEST_URI"];
+        $request_uri = isset($_SERVER["REQUEST_URI"]) ? $_SERVER["REQUEST_URI"] : '/';
+        $this->path_info = env["subdir"] ? (String) Stringy::create($request_uri)->removeLeft(env["subdir"]) : $request_uri;
 
         $this->errors();
         $this->segments();
